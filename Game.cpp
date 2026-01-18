@@ -4,7 +4,7 @@
 #include "Input.h"
 #include "Combat.h"
 #include "Render.h"
-#include "Level.h"
+#include "level.h"
 
 SDL_Window* window = nullptr;
 SDL_Renderer* renderer = nullptr;
@@ -60,3 +60,4 @@ void gameLoop() {
         SDL_Delay(16);
     }
 }
+
