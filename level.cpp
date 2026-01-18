@@ -1,4 +1,4 @@
-#include "Level.h"
+#include "level.h"
 #include <stdio.h>
 
 void loadLevel(const char* path, Enemy* e, int* count) {
@@ -12,3 +12,4 @@ void loadLevel(const char* path, Enemy* e, int* count) {
     }
     fclose(f);
 }
+
