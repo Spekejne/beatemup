@@ -22,7 +22,7 @@ add_executable(main
         Combat.cpp
         Animation.cpp
         Render.cpp
-        Level.cpp
+        level.cpp
 )
 
 target_link_libraries(main SDL2 SDL2main)
