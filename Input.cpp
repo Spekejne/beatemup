@@ -22,6 +22,7 @@ void handleInput(Player* p) {
 
     if (k[SDL_SCANCODE_X]) {
         p->action = ACT_ATTACK;
-        pushInput(&p->combo, IN_X, SDL_GetTicks());
+        p->combo.pushInput(IN_X, SDL_GetTicks());
     }
 }
+
