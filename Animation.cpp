@@ -41,7 +41,7 @@ void updateAnimation(Animation* a, float dt) {
 
     a->timer += dt;
     if (a->timer >= a->time) {
-        a->timer = 0;
+        a->timer -= a->time;
         a->frame = (a->frame + 1) % a->frames;
     }
 }
@@ -63,6 +63,7 @@ void drawAnimation(Animation* a, int x, int y, int flip) {
         flip == -1 ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE
     );
 }
+
 
 
 
