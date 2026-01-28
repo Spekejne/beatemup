@@ -6,6 +6,7 @@
 #include "Render.h"
 #include "level.h"
 
+SDL_Texture* background = nullptr;
 SDL_Window* window = nullptr;
 SDL_Renderer* renderer = nullptr;
 int running = 1;
@@ -77,37 +78,6 @@ void gameLoop() {
     }
 }
 
-
-
-void shutdownGame() {
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
-}
-
-void gameLoop() {
-    Uint32 last = SDL_GetTicks();
-
-    while (running) {
-        Uint32 now = SDL_GetTicks();
-        float dt = (now - last) / 1000.0f;
-        last = now;
-
-        handleInput(&player);
-
-        if (gameState == STATE_GAME) {
-            updatePlayer(&player, dt);
-
-            for (int i = 0; i < enemyCount; i++)
-                updateEnemy(&enemies[i], &player, dt);
-
-            handleCombat(&player, enemies, enemyCount);
-        }
-
-        renderFrame(&player, enemies, enemyCount);
-        SDL_Delay(16);
-    }
-}
 
 
 
