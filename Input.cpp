@@ -27,10 +27,20 @@ void handleInput(Player* p) {
         p->vz = 20;
     }
 
+    static int prevX = 0;
+    int currX = k[SDL_SCANCODE_X];
+
+    if (currX && !prevX) {
+        p->action = ACT_ATTACK;
+        p->attack.frame = 0;
+        p->attack.timer = 0;
+    }
+    prevX = currX;
     if (k[SDL_SCANCODE_X]) {
         pushInput(&p->combo, IN_X, SDL_GetTicks());
     }
 }
+
 
 
 
