@@ -5,10 +5,12 @@
 
 extern SDL_Window* window;
 extern SDL_Renderer* renderer;
+extern SDL_Texture* background;
 extern int running;
 extern GameState gameState;
 
 bool initGame();
 void shutdownGame();
 void gameLoop();
+
 
