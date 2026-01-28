@@ -1,13 +1,19 @@
 #pragma once
 #include "Animation.h"
-#include "Player.h"
+
+enum EnemyAction {
+    EN_IDLE,
+    EN_WALK
+};
 
 struct Enemy {
     float x, y;
-    int hp;
+    float vx;
+    int facing;
     int alive;
-    Animation idle;
-};
 
-void initEnemy(Enemy* e);
-void updateEnemy(Enemy* e, Player* p, float dt);
+    EnemyAction action;
+
+    Animation idle;
+    Animation walk;
+};
