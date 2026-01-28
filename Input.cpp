@@ -11,7 +11,7 @@ void handleInput(Player* p) {
 
     const Uint8* k = SDL_GetKeyboardState(nullptr);
 
-    // input tylko steruje ruchem
+    // --- RUCH ---
     p->vx = 0;
 
     if (k[SDL_SCANCODE_A]) {
@@ -27,19 +27,19 @@ void handleInput(Player* p) {
         p->vz = 20;
     }
 
+    // --- ATAK (EDGE TRIGGER) ---
     static int prevX = 0;
     int currX = k[SDL_SCANCODE_X];
 
-    if (currX && !prevX) {
+    if (currX && !prevX && p->action != ACT_ATTACK) {
         p->action = ACT_ATTACK;
         p->attack.frame = 0;
         p->attack.timer = 0;
     }
+
     prevX = currX;
-    /*if (k[SDL_SCANCODE_X]) {
-        pushInput(&p->combo, IN_X, SDL_GetTicks());
-    }*/
 }
+
 
 
 
