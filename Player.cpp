@@ -36,8 +36,8 @@ void initPlayer(Player* p) {
         &p->attack,
         renderer,
         "player_attack.bmp",
-        4,        // liczba klatek
-        32, 32,
+        6,        // liczba klatek
+        22, 32,
         0.08f
     );
 }
@@ -81,6 +81,7 @@ if (p->action == ACT_ATTACK) {
     else
         updateAnimation(&p->idle, dt);
 }
+
 
 
 
