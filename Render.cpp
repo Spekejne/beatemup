@@ -9,7 +9,9 @@ void renderFrame(Player* p, Enemy* e, int count) {
     SDL_RenderCopy(renderer, background, NULL, &bg);
 
     // 🔹 GRACZ
-    if (p->action == ACT_WALK)
+    if (p->action == ACT_ATTACK)
+        drawAnimation(&p->attack, p->x, p->y - p->z, p->facing);
+    else if (p->action == ACT_WALK)
         drawAnimation(&p->walk, p->x, p->y - p->z, p->facing);
     else
         drawAnimation(&p->idle, p->x, p->y - p->z, p->facing);
@@ -21,4 +23,3 @@ void renderFrame(Player* p, Enemy* e, int count) {
 
     SDL_RenderPresent(renderer);
 }
-
