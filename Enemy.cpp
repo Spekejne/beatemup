@@ -1,18 +1,29 @@
 #include "Enemy.h"
 #include "Game.h"
 
-void initEnemy(Enemy* e) {
-    e->y = 420;
-    e->hp = 30;
+void initEnemy(Enemy* e, float x, float y) {
+    e->x = x;
+    e->y = y;
+    e->vx = 0;
+    e->facing = -1;
     e->alive = 1;
-    initAnimation(&e->idle, renderer, "assets/enemy_idle.bmp", 1, 64, 96, 0.5f);
-}
+    e->action = EN_IDLE;
 
-void updateEnemy(Enemy* e, Player* p, float dt) {
-    if (!e->alive) return;
+    initAnimation(
+        &e->idle,
+        renderer,
+        "assets/enemy_idle.bmp",
+        4,        // liczba klatek
+        24, 32,
+        0.15f
+    );
 
-    if (p->x < e->x) e->x -= 60 * dt;
-    if (p->x > e->x) e->x += 60 * dt;
-
-    updateAnimation(&e->idle, dt);
+    initAnimation(
+        &e->walk,
+        renderer,
+        "assets/enemy_walk.bmp",
+        6,
+        24, 32,
+        0.1f
+    );
 }
