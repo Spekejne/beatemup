@@ -27,7 +27,7 @@ void initPlayer(Player* p) {
     initAnimation(
         &p->walk,
         renderer,
-        "assets/player_walk.bmp",
+        "player_walk.bmp",
         6,        // liczba klatek
         24, 32,   // rozmiar klatki
         0.1f      // trochę szybciej niż idle
@@ -60,6 +60,7 @@ void updatePlayer(Player* p, float dt) {
     else
         updateAnimation(&p->idle, dt);
 }
+
 
 
 
