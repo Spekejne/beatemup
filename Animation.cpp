@@ -22,7 +22,7 @@ void initAnimation(Animation* a, SDL_Renderer* r,
         return;
     }
 
-    a->frames = f;
+    a->frames = 0.3f;
     a->w = w;
     a->h = h;
     a->time = t;
@@ -31,6 +31,7 @@ void initAnimation(Animation* a, SDL_Renderer* r,
 }
 
 void updateAnimation(Animation* a, float dt) {
+  printf("frame: %d\n", a->frame);
     a->timer += dt;
     if (a->timer >= a->time) {
         a->timer = 0;
@@ -55,4 +56,5 @@ void drawAnimation(Animation* a, int x, int y, int flip) {
         flip == -1 ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE
     );
 }
+
 
