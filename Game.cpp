@@ -64,7 +64,9 @@ bool initGame() {
 
     initPlayer(&player);
     loadLevel("level.txt", enemies, &enemyCount);
-
+    
+    gameState = STATE_GAME;
+    
     return true;
 }
 
@@ -97,6 +99,7 @@ void gameLoop() {
         SDL_Delay(16);
     }
 }
+
 
 
 
