@@ -15,23 +15,6 @@ Player player;
 Enemy enemies[16];
 int enemyCount = 0;
 
-#include "Game.h"
-#include "Player.h"
-#include "Enemy.h"
-#include "Input.h"
-#include "Combat.h"
-#include "Render.h"
-#include "level.h"
-
-SDL_Window* window = nullptr;
-SDL_Renderer* renderer = nullptr;
-int running = 1;
-GameState gameState = STATE_MENU;
-
-Player player;
-Enemy enemies[16];
-int enemyCount = 0;
-
 bool initGame() {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) return false;
 
@@ -125,6 +108,7 @@ void gameLoop() {
         SDL_Delay(16);
     }
 }
+
 
 
 
