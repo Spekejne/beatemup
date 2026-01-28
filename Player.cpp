@@ -17,14 +17,21 @@ void initPlayer(Player* p) {
     initCombo(&p->combo);
 
     initAnimation(
-&p->idle,
-renderer,
-"player_idle.bmp",
-6, // liczba klatek
-24, 32, // szerokość, wysokość klatki
-0.12f
-);
-    //initAnimation(&p->walk, renderer, "assets/player_walk.bmp", 4, 64, 96, 0.12f);
+        &p->idle,
+        renderer,
+        "player_idle.bmp",
+        6, // liczba klatek
+        24, 32, // szerokość, wysokość klatki
+        0.12f
+    );
+    initAnimation(
+        &p->walk,
+        renderer,
+        "assets/player_walk.bmp",
+        6,        // liczba klatek
+        24, 32,   // rozmiar klatki
+        0.1f      // trochę szybciej niż idle
+    );
     //initAnimation(&p->attack, renderer, "assets/player_attack.bmp", 3, 96, 96, 0.1f);
 }
 
@@ -46,6 +53,7 @@ void updatePlayer(Player* p, float dt) {
     else
         updateAnimation(&p->idle, dt);
 }
+
 
 
 
