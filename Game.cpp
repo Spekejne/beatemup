@@ -17,6 +17,9 @@ Enemy enemies[16];
 int enemyCount = 0;
 
 bool initGame() {
+    char* basePath = SDL_GetBasePath();
+printf("Base path: %s\n", basePath);
+SDL_free(basePath);
     if (SDL_Init(SDL_INIT_VIDEO) != 0) return false;
 
     SDL_Surface* surface = SDL_LoadBMP("background.bmp");
@@ -77,6 +80,7 @@ void gameLoop() {
         SDL_Delay(16);
     }
 }
+
 
 
 
