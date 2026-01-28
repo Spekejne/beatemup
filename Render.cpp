@@ -9,7 +9,10 @@ void renderFrame(Player* p, Enemy* e, int count) {
     SDL_RenderCopy(renderer, background, NULL, &bg);
 
     // 🔹 GRACZ
-    drawAnimation(&p->idle, p->x, p->y - p->z, p->facing);
+    if (p->action == ACT_WALK)
+        drawAnimation(&p->walk, p->x, p->y - p->z, p->facing);
+    else
+        drawAnimation(&p->idle, p->x, p->y - p->z, p->facing);
 
     // 🔹 WROGOWIE
     for (int i = 0; i < count; i++)
@@ -18,3 +21,4 @@ void renderFrame(Player* p, Enemy* e, int count) {
 
     SDL_RenderPresent(renderer);
 }
+
