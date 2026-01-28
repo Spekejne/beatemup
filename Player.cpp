@@ -53,13 +53,14 @@ void updatePlayer(Player* p, float dt) {
         p->action = ACT_IDLE;
 }
 
-   /* if (p->action == ACT_WALK)
+   if (p->action == ACT_WALK)
         updateAnimation(&p->walk, dt);
     else if (p->action == ACT_ATTACK)
         updateAnimation(&p->attack, dt);
     else
-        updateAnimation(&p->idle, dt); */
+        updateAnimation(&p->idle, dt);
 }
+
 
 
 
