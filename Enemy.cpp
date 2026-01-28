@@ -12,7 +12,7 @@ void initEnemy(Enemy* e, float x, float y) {
     initAnimation(
         &e->idle,
         renderer,
-        "assets/enemy_idle.bmp",
+        "enemy_idle.bmp",
         4,        // liczba klatek
         24, 32,
         0.15f
@@ -21,9 +21,10 @@ void initEnemy(Enemy* e, float x, float y) {
     initAnimation(
         &e->walk,
         renderer,
-        "assets/enemy_walk.bmp",
+        "enemy_walk.bmp",
         6,
         24, 32,
         0.1f
     );
 }
+
