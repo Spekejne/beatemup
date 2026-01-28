@@ -32,7 +32,14 @@ void initPlayer(Player* p) {
         24, 32,   // rozmiar klatki
         0.1f      // trochę szybciej niż idle
     );
-    //initAnimation(&p->attack, renderer, "assets/player_attack.bmp", 3, 96, 96, 0.1f);
+    initAnimation(
+        &p->attack,
+        renderer,
+        "player_attack.bmp",
+        4,        // liczba klatek
+        32, 32,
+        0.08f
+    );
 }
 
 void updatePlayer(Player* p, float dt) {
@@ -60,6 +67,7 @@ void updatePlayer(Player* p, float dt) {
     else
         updateAnimation(&p->idle, dt);
 }
+
 
 
 
