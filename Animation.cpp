@@ -4,6 +4,12 @@
 void initAnimation(Animation* a, SDL_Renderer* r,
                    const char* path, int f, int w, int h, float t) {
 
+    a->frames = 0;
+    a->frame = 0;
+    a->timer = 0;
+    a->time = t;
+    a->tex = NULL;
+
     SDL_Surface* s = SDL_LoadBMP(path);
     if (!s) {
         printf("Nie mozna zaladowac %s: %s\n", path, SDL_GetError());
@@ -22,7 +28,7 @@ void initAnimation(Animation* a, SDL_Renderer* r,
         return;
     }
 
-    a->frames = 0.3f;
+    a->frames = f;
     a->w = w;
     a->h = h;
     a->time = t;
@@ -31,7 +37,8 @@ void initAnimation(Animation* a, SDL_Renderer* r,
 }
 
 void updateAnimation(Animation* a, float dt) {
-  printf("frame: %d\n", a->frame);
+    if (!a || a->frames <= 0) return;   // 🔥 KLUCZOWE
+
     a->timer += dt;
     if (a->timer >= a->time) {
         a->timer = 0;
@@ -56,5 +63,6 @@ void drawAnimation(Animation* a, int x, int y, int flip) {
         flip == -1 ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE
     );
 }
+
 
 
