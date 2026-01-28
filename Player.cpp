@@ -29,7 +29,6 @@ renderer,
 }
 
 void updatePlayer(Player* p, float dt) {
-    fprintf(stderr, "updatePlayer\n");
     p->x += p->vx * dt;
 
     p->vz -= GRAVITY * dt;
@@ -47,6 +46,7 @@ void updatePlayer(Player* p, float dt) {
     else
         updateAnimation(&p->idle, dt);
 }
+
 
 
 
