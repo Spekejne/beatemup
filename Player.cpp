@@ -43,6 +43,20 @@ void initPlayer(Player* p) {
 }
 
 void updatePlayer(Player* p, float dt) {
+
+    // JEŚLI ATAK TRWA — NIC INNEGO NIE RÓB
+if (p->action == ACT_ATTACK) {
+    updateAnimation(&p->attack, dt);
+
+    // jeśli animacja ataku się skończyła
+    if (p->attack.frame == p->attack.frames - 1) {
+        p->action = (p->vx != 0) ? ACT_WALK : ACT_IDLE;
+        p->attack.frame = 0;
+        p->attack.timer = 0;
+    }
+    return;
+}
+    
     p->x += p->vx * dt;
 
     p->vz -= GRAVITY * dt;
@@ -67,6 +81,7 @@ void updatePlayer(Player* p, float dt) {
     else
         updateAnimation(&p->idle, dt);
 }
+
 
 
 
