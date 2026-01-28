@@ -17,9 +17,15 @@ void renderFrame(Player* p, Enemy* e, int count) {
         drawAnimation(&p->idle, p->x, p->y - p->z, p->facing);
 
     // 🔹 WROGOWIE
-    for (int i = 0; i < count; i++)
-        if (e[i].alive)
-            drawAnimation(&e[i].idle, e[i].x, e[i].y, 1);
+    for (int i = 0; i < count; i++) {
+    if (!e[i].alive) continue;
+
+    if (e[i].action == EN_WALK)
+        drawAnimation(&e[i].walk, e[i].x, e[i].y, e[i].facing);
+    else
+        drawAnimation(&e[i].idle, e[i].x, e[i].y, e[i].facing);
+}
 
     SDL_RenderPresent(renderer);
 }
+
