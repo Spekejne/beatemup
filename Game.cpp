@@ -18,6 +18,22 @@ int enemyCount = 0;
 bool initGame() {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) return false;
 
+    SDL_Surface* surface = SDL_LoadBMP("background.bmp");
+    if (!surface) {
+    printf("Nie mozna zaladowac background.bmp: %s\n", SDL_GetError());
+    return false;
+    }
+
+
+    background = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_FreeSurface(surface);
+
+
+    if (!background) {
+    printf("Nie mozna utworzyc tekstury tla: %s\n", SDL_GetError());
+    return false;
+    }
+
     window = SDL_CreateWindow("Beat'em Up",
                               SDL_WINDOWPOS_CENTERED,
                               SDL_WINDOWPOS_CENTERED,
@@ -60,4 +76,5 @@ void gameLoop() {
         SDL_Delay(16);
     }
 }
+
 
