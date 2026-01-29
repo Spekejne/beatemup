@@ -22,7 +22,7 @@ void initPlayer(Player* p) {
         "player_idle.bmp",
         6, // liczba klatek
         24, 32, // szerokość, wysokość klatki
-        0.12f
+        0.12f,
         255, 255, 255
     );
     initAnimation(
@@ -84,6 +84,7 @@ if (p->action == ACT_ATTACK) {
     else
         updateAnimation(&p->idle, dt);
 }
+
 
 
 
