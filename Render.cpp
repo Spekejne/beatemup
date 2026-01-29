@@ -2,6 +2,10 @@
 #include "Game.h"
 
 void renderFrame(Player* p, Enemy* e, int count) {
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+SDL_RenderClear(renderer);
+SDL_RenderPresent(renderer);
+return;
     SDL_RenderClear(renderer);
 
     // 🔹 TŁO
@@ -33,5 +37,6 @@ else
 drawAnimation(&e[i].idle, e[i].x, e[i].y, e[i].facing);
 }
 }
+
 
 
