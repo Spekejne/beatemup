@@ -14,6 +14,7 @@ extern GameState gameState;
 bool initGame();
 void shutdownGame();
 void gameLoop();
-
+bool allEnemiesDead();
+void startLevel(int level);
 
 
