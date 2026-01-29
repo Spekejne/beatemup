@@ -22,6 +22,7 @@ set(SRCS
     Animation.cpp
     Render.cpp
     level.cpp
+    Collision.cpp
 )
 
 # Utwórz plik wykonywalny
