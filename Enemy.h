@@ -1,6 +1,7 @@
 #pragma once
 #include "Animation.h"
 #include "Player.h"
+#include "Hitbox.h"
 
 enum EnemyAction {
     EN_IDLE,
@@ -24,8 +25,12 @@ struct Enemy {
     Animation attack;
     Animation hit;
     Animation dead;
+
+    Hitbox hurtbox;
+    Hitbox hitbox;
 };
 
 void initEnemy(Enemy* e, float x, float y);
 void updateEnemy(Enemy* e, Player* p, float dt);
+
 
