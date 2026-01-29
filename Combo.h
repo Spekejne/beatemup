@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 
 #define INPUT_BUFFER 16
 
@@ -19,4 +19,5 @@ struct ComboBuffer {
 void initCombo(ComboBuffer* cb);
 void pushInput(ComboBuffer* cb, InputType in, float t);
 int checkComboXXX(ComboBuffer* cb);
-int checkComboXYX(ComboBuffer* cb);
+int checkComboXYX(ComboBuffer* cb); */
+
