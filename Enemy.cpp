@@ -69,6 +69,18 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
         return;
     }
 
+    if (e->action == EN_ATTACK && intersects(e->hitbox, p->hurtbox)) {
+    p->hp -= 1;        // enemy damage
+    p->combo = 0;     // 💥 reset combo po dostaniu hita
+    p->comboTimer = 0;
+
+    printf("PLAYER HIT! HP=%d\n", p->hp);
+
+    if (p->hp <= 0) {
+        gameState = STATE_MENU; // albo GAME OVER
+    }
+}
+
     // 🚶 CHODZENIE DO GRACZA
     if (dist > 30) {
         e->vx = (dx > 0) ? 60.0f : -60.0f;
@@ -85,6 +97,7 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
     else
         updateAnimation(&e->idle, dt);
 }
+
 
 
 
