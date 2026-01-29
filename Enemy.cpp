@@ -10,14 +10,13 @@ void initEnemy(Enemy* e, float x, float y) {
     e->facing = -1;
     e->alive = 1;
     e->hp = 3;
+    e->attackDamage = 1;
     e->action = EN_IDLE;
 
     // ⚠️ DOPASUJ ŚCIEŻKI I ROZMIARY DO SWOICH BMP
     initAnimation(&e->idle,   renderer, "enemy_idle.bmp",   5, 64, 64, 0.15f, 255, 0, 255);
     initAnimation(&e->walk,   renderer, "enemy_walk.bmp",   5, 64, 64, 0.10f, 255, 0, 255);
     //initAnimation(&e->attack, renderer, "assets/enemy_attack.bmp", 5, 64, 64, 0.10f);
-    //initAnimation(&e->hit,    renderer, "assets/enemy_hit.bmp",    2, 64, 64, 0.15f);
-    //initAnimation(&e->dead,   renderer, "assets/enemy_dead.bmp",   5, 64, 64, 0.20f);
 }
 
 void updateEnemyHitboxes(Enemy* e) {
@@ -122,4 +121,5 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
     else
         updateAnimation(&e->idle, dt);
 }
+
 
