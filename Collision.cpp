@@ -1,11 +1,17 @@
 #include "Collision.h"
 #include "Combat.h"
 
+bool bodyOverlapY(const Hitbox& a, const Hitbox& b)
+{
+    return a.y < b.y + b.h &&
+           a.y + a.h > b.y;
+}
+
 void resolveBodyCollision(Player* p, Enemy* e)
 {
     if (p->z > 0.0f) return;
 
-    if (!intersects(p->hurtbox, e->hurtbox))
+    if (!bodyOverLapY(p->hurtbox, e->hurtbox))
         return;
 
     float pCenter = p->hurtbox.x + p->hurtbox.w * 0.5f;
