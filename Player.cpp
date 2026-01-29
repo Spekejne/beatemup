@@ -91,6 +91,8 @@ void updatePlayer(Player* p, float dt) {
     // JEŚLI ATAK TRWA — NIC INNEGO NIE RÓB
 if (p->action == ACT_ATTACK) {
     updateAnimation(&p->attack, dt);
+    printf("HP: %d/%d  COMBO: %d\n",
+       player.hp, player.maxHp, player.combo);
 
     // jeśli animacja ataku się skończyła
     if (p->attack.frame == p->attack.frames - 1) {
@@ -133,5 +135,6 @@ if (p->action == ACT_ATTACK) {
     else
         updateAnimation(&p->idle, dt);
 }
+
 
 
