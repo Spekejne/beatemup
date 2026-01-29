@@ -60,6 +60,8 @@ if (intersects(p->hitbox, e[i].hurtbox)) {
             }
         }
     }
-    }
 }
+}
+}
+
 
