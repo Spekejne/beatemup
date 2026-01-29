@@ -3,7 +3,10 @@
 
 enum EnemyAction {
     EN_IDLE,
-    EN_WALK
+    EN_WALK,
+    EN_ATTACK,
+    EN_HIT,
+    EN_DEAD
 };
 
 struct Enemy {
@@ -11,9 +14,13 @@ struct Enemy {
     float vx;
     int facing;
     int alive;
+    int hp;
 
     EnemyAction action;
 
     Animation idle;
     Animation walk;
+    Animation attack;
+    Animation hit;
+    Animation dead;
 };
