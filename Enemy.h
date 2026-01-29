@@ -1,5 +1,6 @@
 #pragma once
 #include "Animation.h"
+#include "Player.h"
 
 enum EnemyAction {
     EN_IDLE,
@@ -27,3 +28,4 @@ struct Enemy {
 
 void initEnemy(Enemy* e, float x, float y);
 void updateEnemy(Enemy* e, Player* p, float dt);
+
