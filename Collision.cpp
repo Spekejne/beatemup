@@ -9,6 +9,7 @@ bool bodyOverLapY(const Hitbox& a, const Hitbox& b)
 
 void resolveBodyCollision(Player* p, Enemy* e)
 {
+    if (!e->alive) return;
     if (p->z > 0.0f) return;
 
     if (!bodyOverLapY(p->hurtbox, e->hurtbox))
