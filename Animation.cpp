@@ -2,7 +2,7 @@
 #include "Game.h"   // żeby mieć dostęp do globalnego renderer
 
 void initAnimation(Animation* a, SDL_Renderer* r,
-                   const char* path, int f, int w, int h, float t) {
+                   const char* path, int f, int w, int h, float t, Uint8 rKey, Uint8 gKey, Uint8 bKey) {
     SDL_Surface* s = SDL_LoadBMP(path);
     if (!s) {
         printf("❌ FAILED TO LOAD %s: %s\n", path, SDL_GetError());
@@ -58,6 +58,7 @@ void drawAnimation(Animation* a, int x, int y, int flip, int scale) {
         flip == -1 ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE
     );
 }
+
 
 
 
