@@ -1,7 +1,7 @@
 #include "Collision.h"
 #include "Combat.h"
 
-bool bodyOverlapY(const Hitbox& a, const Hitbox& b)
+bool bodyOverLapY(const Hitbox& a, const Hitbox& b)
 {
     return a.y < b.y + b.h &&
            a.y + a.h > b.y;
