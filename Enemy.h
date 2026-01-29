@@ -28,16 +28,9 @@ struct Enemy {
 
     Hitbox hurtbox;
     Hitbox hitbox;
-
-    float hitboxOffsetX;
-    float hitboxOffsetY;
 };
 
 void initEnemy(Enemy* e, float x, float y);
 void updateEnemy(Enemy* e, Player* p, float dt);
 void updateEnemyHitboxes(Enemy* e);
-
-
-
-
 
