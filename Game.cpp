@@ -88,17 +88,21 @@ void gameLoop() {
 
         if (gameState == STATE_GAME) {
             updatePlayer(&player, dt);
+updatePlayerHitboxes(&player);
 
-            for (int i = 0; i < enemyCount; i++)
-                updateEnemy(&enemies[i], &player, dt);
+for (int i = 0; i < enemyCount; i++) {
+    updateEnemy(&enemies[i], &player, dt);
+    updateEnemyHitboxes(&enemies[i]);
+}
 
-            handleCombat(&player, enemies, enemyCount);
+handleCombat(&player, enemies, enemyCount);
         }
 
         renderFrame(&player, enemies, enemyCount);
         SDL_Delay(16);
     }
 }
+
 
 
 
