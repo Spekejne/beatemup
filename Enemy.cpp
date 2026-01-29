@@ -22,7 +22,7 @@ void initEnemy(Enemy* e, float x, float y) {
 void updateEnemyHitboxes(Enemy* e) {
 
     //martwy - brak kolizji
-    if (!e->alive || e->action == EN_DEAD) {
+    if (!e->alive) {
         e->hurtbox.w = 0;
         e->hurtbox.h = 0;
         e->hitbox.w = 0;
@@ -42,7 +42,7 @@ void updateEnemyHitboxes(Enemy* e) {
         int dir = e->facing;
         e->hitbox.w = spriteW * 0.4f;
         e->hitbox.h = spriteH * 0.3f;
-        e->hitbox.x = e->x + (dir == 1 ? spriteW : -e->hitbox.w);
+        e->hitbox.x = e->x + (e->facing == 1 ? spriteW : -e->hitbox.w);
         e->hitbox.y = e->y + spriteH * 0.35f;
     } else {
         e->hitbox.w = 0;
@@ -52,52 +52,19 @@ void updateEnemyHitboxes(Enemy* e) {
 
 void updateEnemy(Enemy* e, Player* p, float dt) {
     updateEnemyHitboxes(e);
-    // 💀 ŚMIERĆ – animuje się, a dopiero potem znika
-    if (e->action == EN_DEAD) {
-        e->alive = 0;
-        return;
-    }
-
     // ❌ jeśli już martwy (po animacji) – nic nie rób
     if (!e->alive)
         return;
-
-    // 💥 HIT
-    if (e->action == EN_HIT) {
-        if (e->hit.frame == e->hit.frames - 1) {
-            if (e->hp <= 0) {
-                e->action = EN_DEAD;
-                e->dead.frame = 0;
-                e->dead.timer = 0;
-            } else {
-                e->action = EN_IDLE;
-            }
-            e->hit.frame = 0;
-            e->hit.timer = 0;
-        }
-        return;
-    }
 
     float dx = p->x - e->x;
 
     // ⚔️ ATAK (gdy blisko gracza)
     if (fabs(dx) < 40) {
         e->vx = 0;
+        e->facing = ( dx > 0 ) ? 1 : -1;
         e->action = EN_ATTACK;
         updateAnimation(&e->attack, dt);
-
-        // przykładowy hit gracza w konkretnej klatce
-        if (e->attack.frame == 2) {
-            p->hp -= 1;
-        }
-
-        if (e->attack.frame == e->attack.frames - 1) {
-            e->attack.frame = 0;
-            e->attack.timer = 0;
-            e->action = EN_IDLE;
-        }
         return;
-    }
 
     // 🚶 CHODZENIE DO GRACZA
     if (fabs(dx) > 5) {
@@ -117,6 +84,7 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
     else
         updateAnimation(&e->idle, dt);
 }
+
 
 
 
