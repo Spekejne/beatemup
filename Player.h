@@ -29,4 +29,5 @@ struct Player {
 
 void initPlayer(Player* p);
 void updatePlayer(Player* p, float dt);
+void updatePlayerHitboxes(Player* p);
 
