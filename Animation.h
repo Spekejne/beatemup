@@ -13,7 +13,8 @@ struct Animation {
 void initAnimation(Animation* a, SDL_Renderer* r,
                    const char* path, int f, int w, int h, float t);
 void updateAnimation(Animation* a, float dt);
-void drawAnimation(Animation* a, int x, int y, int flip, int scale;);
+void drawAnimation(Animation* a, int x, int y, int flip, int scale);
+
 
 
 
