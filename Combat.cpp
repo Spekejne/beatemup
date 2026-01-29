@@ -26,54 +26,39 @@ if (!e[i].alive)
 continue;
 
 
-// ❌ enemy już trafiony / martwy
-if (e[i].action == EN_HIT || e[i].action == EN_DEAD)
-continue;
-
-
 // ✅ PRAWDZIWA KOLIZJA
 if (intersects(p->hitbox, e[i].hurtbox)) {
 
 
-e[i].hp--;
-e[i].action = EN_HIT;
+// 🧍‍♂️ PLAYER ATAKUJE
+    if (p->action == ACT_ATTACK && p->hitbox.w > 0) {
 
+        for (int i = 0; i < count; i++) {
+            if (!e[i].alive) continue;
 
-// reset animacji hit
-e[i].hit.frame = 0;
-e[i].hit.timer = 0;
+            if (intersects(p->hitbox, e[i].hurtbox)) {
+                e[i].hp--;
 
+                if (e[i].hp <= 0) {
+                    e[i].alive = false;   // 👈 ZNIKA
+                }
+            }
+        }
+    }
 
-// 💀 śmierć
-if (e[i].hp <= 0) {
-e[i].action = EN_DEAD;
-e[i].dead.frame = 0;
-e[i].dead.timer = 0;
-}
-}
-}
-    // 👾 ENEMY ATAKUJE GRACZA
-for (int i = 0; i < count; i++) {
-    if (!e[i].alive)
-        continue;
+    // 👾 ENEMY ATAKUJE PLAYERA
+    for (int i = 0; i < count; i++) {
+        if (!e[i].alive) continue;
 
-    // enemy musi atakować
-    if (e[i].action != EN_ATTACK)
-        continue;
+        if (e[i].hitbox.w > 0 &&
+            intersects(e[i].hitbox, p->hurtbox)) {
 
-    // brak hitboxa
-    if (e[i].hitbox.w == 0 || e[i].hitbox.h == 0)
-        continue;
-
-    // kolizja
-    if (intersects(e[i].hitbox, p->hurtbox)) {
-
-        // ⚠️ NIE co klatkę – tylko raz na animację
-        if (!p->invincible) {
-            p->hp--;
-            p->invincible = true;
-            p->invincibleTimer = 0.6f; // pół sekundy
+            if (!p->invincible) {
+                p->hp -= e[i].attackDamage;
+                p->invincible = true;
+                p->invincibleTimer = 0.6f; // i-frames
+            }
         }
     }
 }
-}
+
