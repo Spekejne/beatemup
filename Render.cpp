@@ -2,7 +2,6 @@
 #include "Game.h"
 
 void renderFrame(Player* p, Enemy* e, int count) {
-    void renderFrame(Player* p, Enemy* e, int count) {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
 
@@ -13,7 +12,7 @@ void renderFrame(Player* p, Enemy* e, int count) {
 
     SDL_RenderPresent(renderer);
 }
-}
+
 
 
 
