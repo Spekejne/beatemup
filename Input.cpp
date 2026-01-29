@@ -16,7 +16,7 @@ void handleInput(Player* p) {
 
     if (k[SDL_SCANCODE_N]) {
         gameState = STATE_GAME;
-        startLevel(1);
+        //startLevel(1);
     }
         return;
     }
@@ -49,6 +49,7 @@ void handleInput(Player* p) {
 
     prevX = currX;
 }
+
 
 
 
