@@ -126,7 +126,9 @@ for (int i = 0; i < enemyCount; i++)
         renderFrame(&player, enemies, enemyCount);
         SDL_Delay(16);
     }
+    }
 }
+
 
 
 
