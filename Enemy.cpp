@@ -52,7 +52,6 @@ void updateEnemyHitboxes(Enemy* e) {
 
 void updateEnemy(Enemy* e, Player* p, float dt) {
     updateEnemyHitboxes(e);
-    void updateEnemy(Enemy* e, Player* p, float dt) {
 
     if (!e->alive)
         return;
@@ -86,7 +85,7 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
     else
         updateAnimation(&e->idle, dt);
 }
-}
+
 
 
 
