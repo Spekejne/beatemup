@@ -3,30 +3,25 @@
 
 void initAnimation(Animation* a, SDL_Renderer* r,
                    const char* path, int f, int w, int h, float t) {
-
-    a->frames = 0;
-    a->frame = 0;
-    a->timer = 0;
-    a->time = t;
-    a->tex = NULL;
-
     SDL_Surface* s = SDL_LoadBMP(path);
     if (!s) {
-        printf("Nie mozna zaladowac %s: %s\n", path, SDL_GetError());
+        printf("❌ FAILED TO LOAD %s: %s\n", path, SDL_GetError());
+        a->tex = NULL;
         return;
     }
 
-    // BIAŁY KOLOR JAKO PRZEZROCZYSTY
-    Uint32 white = SDL_MapRGB(s->format, 255, 255, 255);
-    SDL_SetColorKey(s, SDL_TRUE, white);
+    Uint32 pink = SDL_MapRGB(s->format, 255, 0, 255);
+    SDL_SetColorKey(s, SDL_TRUE, pink);
 
     a->tex = SDL_CreateTextureFromSurface(r, s);
     SDL_FreeSurface(s);
 
     if (!a->tex) {
-        printf("Nie mozna utworzyc tekstury animacji: %s\n", SDL_GetError());
+        printf("❌ FAILED TO CREATE TEX %s: %s\n", path, SDL_GetError());
         return;
     }
+
+    printf("✅ LOADED %s\n", path);
 
     a->frames = f;
     a->w = w;
@@ -63,6 +58,7 @@ void drawAnimation(Animation* a, int x, int y, int flip) {
         flip == -1 ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE
     );
 }
+
 
 
 
