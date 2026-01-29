@@ -14,26 +14,27 @@ void renderFrame(Player* p, Enemy* e, int count) {
 
     // 🧍 GRACZ
     if (p->action == ACT_ATTACK)
-        drawAnimation(&p->attack, p->x, p->y - p->z, p->facing);
+        drawAnimation(&p->attack, p->x, p->y - p->z, p->facing, 3);
     else if (p->action == ACT_WALK)
-        drawAnimation(&p->walk, p->x, p->y - p->z, p->facing);
+        drawAnimation(&p->walk, p->x, p->y - p->z, p->facing, 3);
     else
-        drawAnimation(&p->idle, p->x, p->y - p->z, p->facing);
+        drawAnimation(&p->idle, p->x, p->y - p->z, p->facing, 3);
 
     // 👾 ENEMY
     for (int i = 0; i < count; i++) {
         if (!e[i].alive) continue;
 
         if (e[i].action == EN_ATTACK)
-            drawAnimation(&e[i].attack, e[i].x, e[i].y, e[i].facing);
+            drawAnimation(&e[i].attack, e[i].x, e[i].y, e[i].facing, 1);
         else if (e[i].action == EN_WALK)
-            drawAnimation(&e[i].walk, e[i].x, e[i].y, e[i].facing);
+            drawAnimation(&e[i].walk, e[i].x, e[i].y, e[i].facing, 1);
         else if (e[i].action == EN_HIT)
-            drawAnimation(&e[i].hit, e[i].x, e[i].y, e[i].facing);
+            drawAnimation(&e[i].hit, e[i].x, e[i].y, e[i].facing, 1);
         else
-            drawAnimation(&e[i].idle, e[i].x, e[i].y, e[i].facing);
+            drawAnimation(&e[i].idle, e[i].x, e[i].y, e[i].facing, 1);
     }
 
     // 🖥️ POKAŻ KLATKĘ
     SDL_RenderPresent(renderer);
 }
+
