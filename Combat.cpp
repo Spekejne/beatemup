@@ -29,6 +29,19 @@ continue;
 // ✅ PRAWDZIWA KOLIZJA
 if (intersects(p->hitbox, e[i].hurtbox)) {
 
+     // 🔥 COMBO
+            p->combo++;
+            p->comboTimer = 1.2f; // reset czasu combo
+
+            // ⚔️ DAMAGE = base + combo bonus
+            int dmg = p->baseDamage + (p->combo / 3);
+            // co 3 hity +1 dmg
+
+            e[i].hp -= dmg;
+
+            printf("HIT! combo=%d dmg=%d enemyHP=%d\n",
+                   p->combo, dmg, e[i].hp);
+
 
 // 🧍‍♂️ PLAYER ATAKUJE
     if (p->action == ACT_ATTACK && p->hitbox.w > 0) {
@@ -63,5 +76,6 @@ if (intersects(p->hitbox, e[i].hurtbox)) {
 }
 }
 }
+
 
 
