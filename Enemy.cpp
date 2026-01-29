@@ -54,10 +54,7 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
     updateEnemyHitboxes(e);
     // 💀 ŚMIERĆ – animuje się, a dopiero potem znika
     if (e->action == EN_DEAD) {
-        updateAnimation(&e->dead, dt);
-        if (e->dead.frame == e->dead.frames - 1) {
-            e->alive = 0;   // zniknie po animacji
-        }
+        e->alive = 0;
         return;
     }
 
@@ -67,7 +64,6 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
 
     // 💥 HIT
     if (e->action == EN_HIT) {
-        updateAnimation(&e->hit, dt);
         if (e->hit.frame == e->hit.frames - 1) {
             if (e->hp <= 0) {
                 e->action = EN_DEAD;
@@ -121,5 +117,6 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
     else
         updateAnimation(&e->idle, dt);
 }
+
 
 
