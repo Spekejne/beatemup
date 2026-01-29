@@ -22,9 +22,9 @@ void startLevel(int level) {
     enemyCount = 0;
 
     if (level == 1)
-        loadLevel("level1", enemies, &enemyCount);
+        loadLevel("level1.txt", enemies, &enemyCount);
     else if (level == 2)
-        loadLevel("level2", enemies, &enemyCount);
+        loadLevel("level2.txt", enemies, &enemyCount);
 
     // reset gracza
     player.x = 100;
@@ -136,6 +136,7 @@ handleCombat(&player, enemies, enemyCount);
         SDL_Delay(16);
     }
 }
+
 
 
 
