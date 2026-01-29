@@ -1,15 +1,23 @@
 #include "Collision.h"
 #include "Combat.h"
 
-void resolveBodyCollision(Player* p, Enemy* e) {
+void resolveBodyCollision(Player* p, Enemy* e)
+{
     if (!intersects(p->hurtbox, e->hurtbox))
         return;
 
-    float overlapLeft  = (p->hurtbox.x + p->hurtbox.w) - e->hurtbox.x;
-    float overlapRight = (e->hurtbox.x + e->hurtbox.w) - p->hurtbox.x;
+    float pCenter = p->hurtbox.x + p->hurtbox.w * 0.5f;
+    float eCenter = e->hurtbox.x + e->hurtbox.w * 0.5f;
 
-    float push = (overlapLeft < overlapRight) ? overlapLeft : -overlapRight;
+    float overlap =
+        (p->hurtbox.w * 0.5f + e->hurtbox.w * 0.5f) -
+        fabs(pCenter - eCenter);
 
-    p->x -= push * 0.5f;
-    e->x += push * 0.5f;
+    if (overlap <= 0.0f)
+        return;
+
+    float direction = (pCenter < eCenter) ? -1.0f : 1.0f;
+
+    p->x += direction * overlap * 0.5f;
+    e->x -= direction * overlap * 0.5f;
 }
