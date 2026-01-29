@@ -1,33 +1,38 @@
 #include "Enemy.h"
+#include "Player.h"
 #include "Game.h"
 #include <cmath>
-#include "Player.h"
-
 
 void initEnemy(Enemy* e, float x, float y) {
-e->x = x;
-e->y = y;
-e->vx = 0;
-e->facing = -1;
-e->alive = 1;
-e->hp = 3;
-e->action = EN_IDLE;
+    e->x = x;
+    e->y = y;
+    e->vx = 0;
+    e->facing = -1;
+    e->alive = 1;
+    e->hp = 3;
+    e->action = EN_IDLE;
 
-
-initAnimation(&e->idle, renderer, "enemy_idle.bmp", 4, 24, 32, 0.2f);
-initAnimation(&e->walk, renderer, "enemy_walk.bmp", 6, 24, 32, 0.1f);
-initAnimation(&e->attack, renderer, "enemy_attack.bmp", 4, 32, 32, 0.1f);
-initAnimation(&e->hit, renderer, "enemy_hit.bmp", 2, 24, 32, 0.15f);
-initAnimation(&e->dead, renderer, "enemy_dead.bmp", 4, 24, 32, 0.2f);
+    // ⚠️ DOPASUJ ŚCIEŻKI I ROZMIARY DO SWOICH BMP
+    initAnimation(&e->idle,   renderer, "enemy_idle.bmp",   5, 64, 64, 0.15f);
+    initAnimation(&e->walk,   renderer, "enemy_walk.bmp",   5, 64, 64, 0.10f);
+    //initAnimation(&e->attack, renderer, "assets/enemy_attack.bmp", 5, 64, 64, 0.10f);
+    //initAnimation(&e->hit,    renderer, "assets/enemy_hit.bmp",    2, 64, 64, 0.15f);
+    //initAnimation(&e->dead,   renderer, "assets/enemy_dead.bmp",   5, 64, 64, 0.20f);
 }
 
 void updateEnemy(Enemy* e, Player* p, float dt) {
-    // 💀 ŚMIERĆ
+    // 💀 ŚMIERĆ – animuje się, a dopiero potem znika
     if (e->action == EN_DEAD) {
         updateAnimation(&e->dead, dt);
+        if (e->dead.frame == e->dead.frames - 1) {
+            e->alive = 0;   // zniknie po animacji
+        }
         return;
     }
-    if (!e->alive) return;
+
+    // ❌ jeśli już martwy (po animacji) – nic nie rób
+    if (!e->alive)
+        return;
 
     // 💥 HIT
     if (e->action == EN_HIT) {
@@ -35,7 +40,8 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
         if (e->hit.frame == e->hit.frames - 1) {
             if (e->hp <= 0) {
                 e->action = EN_DEAD;
-                e->alive = 0;
+                e->dead.frame = 0;
+                e->dead.timer = 0;
             } else {
                 e->action = EN_IDLE;
             }
@@ -47,13 +53,13 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
 
     float dx = p->x - e->x;
 
-    // ⚔️ ATAK
+    // ⚔️ ATAK (gdy blisko gracza)
     if (fabs(dx) < 40) {
         e->vx = 0;
         e->action = EN_ATTACK;
         updateAnimation(&e->attack, dt);
 
-        // HIT PLAYERA (prosto)
+        // przykładowy hit gracza w konkretnej klatce
         if (e->attack.frame == 2) {
             p->hp -= 1;
         }
@@ -66,9 +72,9 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
         return;
     }
 
-    // 🚶 CHODZENIE
+    // 🚶 CHODZENIE DO GRACZA
     if (fabs(dx) > 5) {
-        e->vx = (dx > 0) ? 60 : -60;
+        e->vx = (dx > 0) ? 60.0f : -60.0f;
         e->facing = (dx > 0) ? 1 : -1;
         e->action = EN_WALK;
     } else {
@@ -78,12 +84,9 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
 
     e->x += e->vx * dt;
 
+    // 🎞️ Animacje
     if (e->action == EN_WALK)
         updateAnimation(&e->walk, dt);
     else
         updateAnimation(&e->idle, dt);
 }
-
-
-
-
