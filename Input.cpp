@@ -11,6 +11,16 @@ void handleInput(Player* p) {
 
     const Uint8* k = SDL_GetKeyboardState(nullptr);
 
+    if (gameState == STATE_MENU) {
+    const Uint8* k = SDL_GetKeyboardState(nullptr);
+
+    if (k[SDL_SCANCODE_N]) {
+        gameState = STATE_GAME;
+        startLevel(1);
+    }
+        return;
+    }
+
     // --- RUCH ---
     p->vx = 0;
 
@@ -39,6 +49,7 @@ void handleInput(Player* p) {
 
     prevX = currX;
 }
+
 
 
 
