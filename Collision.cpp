@@ -3,6 +3,11 @@
 
 void resolveBodyCollision(Player* p, Enemy* e)
 {
+    //brak ciała
+    if (e->hurtbox.w == 0 || e->hurtbox.h == 0){
+        return;
+    }
+    
     if (p->z > 0.0f) return;
 
     if (!intersects(p->hurtbox, e->hurtbox))
