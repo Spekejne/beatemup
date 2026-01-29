@@ -33,25 +33,25 @@ void updateEnemyHitboxes(Enemy* e)
     int spriteW = e->idle.w * SCALE;
     int spriteH = e->idle.h * SCALE;
 
-    // =========================
-    // BODY / HURTBOX (TYLKO NOGI)
-    // =========================
+    // ========= BODY (KOLIZJA CIAŁA) =========
     const int BODY_W = spriteW * 0.35f;
     const int BODY_H = spriteH * 0.15f;
 
     e->hurtbox.w = BODY_W;
     e->hurtbox.h = BODY_H;
 
-    // środek sprite'a + dół
-    e->hurtbox.x = e->x + spriteW * 0.5f - BODY_W * 0.5f - 6; // ← lekkie przesunięcie w LEWO
-    e->hurtbox.y = e->y + spriteH - BODY_H;
+    e->hurtbox.x =
+        e->x + spriteW * 0.5f - BODY_W * 0.5f
+        + e->hitboxOffsetX;
 
-    // =========================
-    // HITBOX ATAKU
-    // =========================
+    e->hurtbox.y =
+        e->y + spriteH - BODY_H
+        + e->hitboxOffsetY;
+
+    // ========= HITBOX ATAKU =========
     if (e->action == EN_ATTACK)
     {
-        int dir = e->facing; // -1 lewo, 1 prawo
+        int dir = e->facing; // -1 / +1
 
         e->hitbox.w = spriteW * 0.4f;
         e->hitbox.h = spriteH * 0.25f;
@@ -61,7 +61,6 @@ void updateEnemyHitboxes(Enemy* e)
             ? e->x + spriteW * 0.65f
             : e->x - e->hitbox.w + spriteW * 0.35f;
 
-        // klatka piersiowa (NIE nogi)
         e->hitbox.y = e->y + spriteH * 0.45f;
     }
     else
@@ -142,6 +141,7 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
     else
         updateAnimation(&e->idle, dt);
 }
+
 
 
 
