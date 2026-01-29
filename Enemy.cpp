@@ -52,24 +52,27 @@ void updateEnemyHitboxes(Enemy* e) {
 
 void updateEnemy(Enemy* e, Player* p, float dt) {
     updateEnemyHitboxes(e);
-    // ❌ jeśli już martwy (po animacji) – nic nie rób
+    void updateEnemy(Enemy* e, Player* p, float dt) {
+
     if (!e->alive)
         return;
 
     float dx = p->x - e->x;
+    float dist = fabs(dx);
 
-    // ⚔️ ATAK (gdy blisko gracza)
-    if (fabs(dx) < 40) {
+    e->facing = (dx > 0) ? 1 : -1;
+
+    // ⚔️ ATAK – TYLKO BARDZO BLISKO
+    if (dist < 28) {
         e->vx = 0;
-        e->facing = ( dx > 0 ) ? 1 : -1;
         e->action = EN_ATTACK;
         updateAnimation(&e->attack, dt);
         return;
+    }
 
     // 🚶 CHODZENIE DO GRACZA
-    if (fabs(dx) > 5) {
+    if (dist > 30) {
         e->vx = (dx > 0) ? 60.0f : -60.0f;
-        e->facing = (dx > 0) ? 1 : -1;
         e->action = EN_WALK;
     } else {
         e->vx = 0;
@@ -78,13 +81,13 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
 
     e->x += e->vx * dt;
 
-    // 🎞️ Animacje
     if (e->action == EN_WALK)
         updateAnimation(&e->walk, dt);
     else
         updateAnimation(&e->idle, dt);
 }
 }
+
 
 
 
