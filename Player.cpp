@@ -17,6 +17,10 @@ void initPlayer(Player* p) {
     p->invincible = false;
     p->invincibleTimer = 0.0f;
 
+    p->combo = 0;
+    p->comboTimer = 0.0f;
+    p->baseDamage = 400;
+
     initCombo(&p->combo);
 
     initAnimation(
@@ -114,6 +118,14 @@ if (p->action == ACT_ATTACK) {
         p->action = ACT_IDLE;
 }
 
+    // ⏱️ combo timer
+    if (p->combo > 0) {
+        p->comboTimer -= dt;
+        if (p->comboTimer <= 0.0f) {
+            p->combo = 0;   // reset combo
+        }
+    }
+
    if (p->action == ACT_WALK)
         updateAnimation(&p->walk, dt);
     else if (p->action == ACT_ATTACK)
@@ -121,4 +133,5 @@ if (p->action == ACT_ATTACK) {
     else
         updateAnimation(&p->idle, dt);
 }
+
 
