@@ -2,13 +2,17 @@
 #include "Game.h"
 
 void renderFrame(Player* p, Enemy* e, int count) {
+    // 🎨 WYCZYŚĆ EKRAN
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
 
-    // 🔹 TŁO
-    SDL_Rect bg = { 0, 0, 800, 600 };
-    SDL_RenderCopy(renderer, background, NULL, &bg);
+    // 🖼️ TŁO (ZAWSZE PIERWSZE)
+    if (background) {
+        SDL_Rect bg = { 0, 0, 800, 600 };
+        SDL_RenderCopy(renderer, background, NULL, &bg);
+    }
 
-    // 🔹 GRACZ
+    // 🧍 GRACZ
     if (p->action == ACT_ATTACK)
         drawAnimation(&p->attack, p->x, p->y - p->z, p->facing);
     else if (p->action == ACT_WALK)
@@ -16,27 +20,20 @@ void renderFrame(Player* p, Enemy* e, int count) {
     else
         drawAnimation(&p->idle, p->x, p->y - p->z, p->facing);
 
-    // 🔹 WROGOWIE
+    // 👾 ENEMY
     for (int i = 0; i < count; i++) {
-if (!e[i].alive && e[i].action != EN_DEAD) continue;
+        if (!e[i].alive) continue;
 
+        if (e[i].action == EN_ATTACK)
+            drawAnimation(&e[i].attack, e[i].x, e[i].y, e[i].facing);
+        else if (e[i].action == EN_WALK)
+            drawAnimation(&e[i].walk, e[i].x, e[i].y, e[i].facing);
+        else if (e[i].action == EN_HIT)
+            drawAnimation(&e[i].hit, e[i].x, e[i].y, e[i].facing);
+        else
+            drawAnimation(&e[i].idle, e[i].x, e[i].y, e[i].facing);
+    }
 
-if (e[i].action == EN_ATTACK)
-drawAnimation(&e[i].attack, e[i].x, e[i].y, e[i].facing);
-else if (e[i].action == EN_WALK)
-drawAnimation(&e[i].walk, e[i].x, e[i].y, e[i].facing);
-else if (e[i].action == EN_HIT)
-drawAnimation(&e[i].hit, e[i].x, e[i].y, e[i].facing);
-else if (e[i].action == EN_DEAD)
-drawAnimation(&e[i].dead, e[i].x, e[i].y, e[i].facing);
-else
-drawAnimation(&e[i].idle, e[i].x, e[i].y, e[i].facing);
+    // 🖥️ POKAŻ KLATKĘ
+    SDL_RenderPresent(renderer);
 }
-}
-
-
-
-
-
-
-
