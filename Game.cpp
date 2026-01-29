@@ -11,11 +11,35 @@ SDL_Texture* background = nullptr;
 SDL_Window* window = nullptr;
 SDL_Renderer* renderer = nullptr;
 int running = 1;
+int currentLevel = 1;
 GameState gameState = STATE_MENU;
 
 Player player;
 Enemy enemies[16];
 int enemyCount = 0;
+
+void startLevel(int level) {
+    enemyCount = 0;
+
+    if (level == 1)
+        loadLevel("level1", enemies, &enemyCount);
+    else if (level == 2)
+        loadLevel("level2", enemies, &enemyCount);
+
+    // reset gracza
+    player.x = 100;
+    player.y = 420;
+    player.hp = 5;
+
+    currentLevel = level;
+}
+
+bool allEnemiesDead() {
+    for (int i = 0; i < enemyCount; i++)
+        if (enemies[i].alive)
+            return false;
+    return true;
+}
 
 bool initGame() {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -112,6 +136,7 @@ handleCombat(&player, enemies, enemyCount);
         SDL_Delay(16);
     }
 }
+
 
 
 
