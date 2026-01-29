@@ -7,8 +7,6 @@ enum EnemyAction {
     EN_IDLE,
     EN_WALK,
     EN_ATTACK,
-    EN_HIT,
-    EN_DEAD
 };
 
 struct Enemy {
@@ -16,6 +14,7 @@ struct Enemy {
     float vx;
     int facing;
     int alive;
+    int attackDamage;
     int hp;
 
     EnemyAction action;
@@ -33,4 +32,5 @@ struct Enemy {
 void initEnemy(Enemy* e, float x, float y);
 void updateEnemy(Enemy* e, Player* p, float dt);
 void updateEnemyHitboxes(Enemy* e);
+
 
