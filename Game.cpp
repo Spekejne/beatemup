@@ -17,6 +17,7 @@ GameState gameState = STATE_MENU;
 Player player;
 Enemy enemies[16];
 int enemyCount = 0;
+int currentLevel;
 
 // 🔥 FLAGA PRZEJŚCIA LEVELU
 bool levelTransition = false;
@@ -112,10 +113,10 @@ resolveBodyCollision(&player, &enemies[i]);
 handleCombat(&player, enemies, enemyCount);
 
 // 5️⃣ SPRAWDŹ KONIEC LEVELU
-bool allDead = true;
+bool allEnemiesDead = true;
 for (int i = 0; i < enemyCount; i++) {
 if (enemies[i].alive) {
-allDead = false;
+allEnemiesDead = false;
 break;
 }
 }
@@ -138,3 +139,4 @@ renderFrame(&player, enemies, enemyCount);
 SDL_Delay(16);
 }
 }
+
