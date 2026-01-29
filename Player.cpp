@@ -45,6 +45,29 @@ void initPlayer(Player* p) {
     );
 }
 
+void updatePlayerHitboxes(Player* p) {
+    int spriteW = p->idle.w * SCALE;
+    int spriteH = p->idle.h * SCALE;
+
+    // 📦 hurtbox (ciało)
+    p->hurtbox.x = p->x + spriteW * 0.25f;
+    p->hurtbox.y = p->y - p->z + spriteH * 0.2f;
+    p->hurtbox.w = spriteW * 0.5f;
+    p->hurtbox.h = spriteH * 0.7f;
+
+    // ⚔️ hitbox (atak)
+    if (p->action == ACT_ATTACK) {
+        int dir = p->facing;
+        p->hitbox.w = spriteW * 0.4f;
+        p->hitbox.h = spriteH * 0.3f;
+        p->hitbox.x = p->x + (dir == 1 ? spriteW : -p->hitbox.w);
+        p->hitbox.y = p->y - p->z + spriteH * 0.35f;
+    } else {
+        p->hitbox.w = 0;
+        p->hitbox.h = 0;
+    }
+}
+
 void updatePlayer(Player* p, float dt) {
 
     updatePlayerHitboxes(p);
@@ -86,41 +109,3 @@ if (p->action == ACT_ATTACK) {
     else
         updateAnimation(&p->idle, dt);
 }
-
-void updatePlayerHitboxes(Player* p) {
-    int spriteW = p->idle.w * SCALE;
-    int spriteH = p->idle.h * SCALE;
-
-    // 📦 hurtbox (ciało)
-    p->hurtbox.x = p->x + spriteW * 0.25f;
-    p->hurtbox.y = p->y - p->z + spriteH * 0.2f;
-    p->hurtbox.w = spriteW * 0.5f;
-    p->hurtbox.h = spriteH * 0.7f;
-
-    // ⚔️ hitbox (atak)
-    if (p->action == ACT_ATTACK) {
-        int dir = p->facing;
-        p->hitbox.w = spriteW * 0.4f;
-        p->hitbox.h = spriteH * 0.3f;
-        p->hitbox.x = p->x + (dir == 1 ? spriteW : -p->hitbox.w);
-        p->hitbox.y = p->y - p->z + spriteH * 0.35f;
-    } else {
-        p->hitbox.w = 0;
-        p->hitbox.h = 0;
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
