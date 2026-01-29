@@ -3,6 +3,8 @@
 #include "State.h"
 #include <SDL2/SDL_render.h>
 
+#define SCALE 3
+
 extern SDL_Window* window;
 extern SDL_Renderer* renderer;
 extern SDL_Texture* background;
@@ -12,5 +14,6 @@ extern GameState gameState;
 bool initGame();
 void shutdownGame();
 void gameLoop();
+
 
 
