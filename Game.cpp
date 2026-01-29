@@ -102,7 +102,7 @@ for (int i = 0; i < enemyCount; i++)
 
     // klucz: HITBOXY przed Combat
     updateEnemyHitboxes(e);
-    updatePlayerHitbox(&player); // jeśli masz podobną funkcję
+    updatePlayerHitboxes(&player); // jeśli masz podobną funkcję
 }
 
 // ==== 3) walka (Combat) ====
@@ -127,6 +127,7 @@ for (int i = 0; i < enemyCount; i++)
         SDL_Delay(16);
     }
 }
+
 
 
 
