@@ -88,7 +88,7 @@ bool initGame() {
     }
 
     initPlayer(&player);
-    loadLevel("level.txt", enemies, &enemyCount);
+    //loadLevel("level.txt", enemies, &enemyCount);
     
     return true;
 }
@@ -136,6 +136,7 @@ handleCombat(&player, enemies, enemyCount);
         SDL_Delay(16);
     }
 }
+
 
 
 
