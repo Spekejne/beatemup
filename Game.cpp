@@ -98,7 +98,7 @@ for (int i = 0; i < enemyCount; i++)
     Enemy* e = &enemies[i];
     if (!e->alive) continue;
 
-    updateEnemy(e, p, dt);
+    updateEnemy(e, &player, dt);
 
     // klucz: HITBOXY przed Combat
     updateEnemyHitboxes(e);
@@ -111,7 +111,7 @@ for (int i = 0; i < enemyCount; i++)
     Enemy* e = &enemies[i];
     if (!e->alive) continue;
 
-    handleCombat(&player, e, &enemies[i]); // Combat zaktualizuje health itd.
+    handleCombat(&player, e, enemyCount); // Combat zaktualizuje health itd.
 }
 
 // ==== 4) kolizja ciała (wypychanie) ====
@@ -127,6 +127,7 @@ for (int i = 0; i < enemyCount; i++)
         SDL_Delay(16);
     }
 }
+
 
 
 
