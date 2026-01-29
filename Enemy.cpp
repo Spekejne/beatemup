@@ -21,6 +21,16 @@ void initEnemy(Enemy* e, float x, float y) {
 }
 
 void updateEnemyHitboxes(Enemy* e) {
+
+    //martwy - brak kolizji
+    if (!e->alive || e->action == EN_DEAD) {
+        e->hurtbox.w = 0;
+        e->hurtbox.h = 0;
+        e->hitbox.w = 0;
+        e->hitbox.h = 0;
+        return;
+    }
+        
     int spriteW = e->idle.w * SCALE;
     int spriteH = e->idle.h * SCALE;
 
@@ -112,3 +122,4 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
     else
         updateAnimation(&e->idle, dt);
 }
+
