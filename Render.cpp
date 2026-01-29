@@ -29,6 +29,10 @@ void renderFrame(Player* p, Enemy* e, int count) {
 
     // 👾 ENEMY
     for (int i = 0; i < count; i++) {
+        printf("RENDER enemy %d alive=%d x=%.1f y=%.1f\n",
+           i, e[i].alive, e[i].x, e[i].y);
+}
+    for (int i = 0; i < count; i++) {
         if (!e[i].alive) continue;
 
         if (e[i].action == EN_ATTACK)
@@ -42,6 +46,7 @@ void renderFrame(Player* p, Enemy* e, int count) {
     // 🖥️ POKAŻ KLATKĘ
     SDL_RenderPresent(renderer);
 }
+
 
 
 
