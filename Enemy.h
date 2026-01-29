@@ -24,3 +24,6 @@ struct Enemy {
     Animation hit;
     Animation dead;
 };
+
+void initEnemy(Enemy* e, float x, float y);
+void updateEnemy(Enemy* e, Player* p, float dt);
