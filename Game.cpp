@@ -21,6 +21,15 @@ int enemyCount = 0;
 
 void startLevel(int level) {
     levelTransition = false;
+
+// 🔥 WYCZYŚĆ STARYCH WROGÓW
+    for (int i = 0; i < 16; i++) {
+        enemies[i].alive = false;
+        enemies[i].hp = 0;
+        enemies[i].action = EN_IDLE;
+    }
+
+    
     enemyCount = 0;
 
     if (level == 1)
@@ -164,6 +173,7 @@ if (gameState == STATE_EXIT){
     shutdownGame();
 }
 }
+
 
 
 
