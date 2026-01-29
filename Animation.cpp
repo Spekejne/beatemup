@@ -10,8 +10,9 @@ void initAnimation(Animation* a, SDL_Renderer* r,
         return;
     }
 
-    Uint32 pink = SDL_MapRGB(s->format, 255, 0, 255);
-    SDL_SetColorKey(s, SDL_TRUE, pink);
+    // COLOR KEY (tło)
+    Uint32 key = SDL_MapRGB(s->format, rKey, gKey, bKey);
+    SDL_SetColorKey(s, SDL_TRUE, key);
 
     a->tex = SDL_CreateTextureFromSurface(r, s);
     SDL_FreeSurface(s);
@@ -58,6 +59,7 @@ void drawAnimation(Animation* a, int x, int y, int flip) {
         flip == -1 ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE
     );
 }
+
 
 
 
