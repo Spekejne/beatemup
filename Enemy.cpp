@@ -42,7 +42,7 @@ void updateEnemyHitboxes(Enemy* e) {
         int dir = e->facing;
         e->hitbox.w = spriteW * 0.4f;
         e->hitbox.h = spriteH * 0.3f;
-        e->hitbox.x = e->x + (e->facing == 1 ? spriteW : -e->hitbox.w);
+        e->hitbox.x = e->x + (dir == 1 ? spriteW : -e->hitbox.w);
         e->hitbox.y = e->y + spriteH * 0.35f;
     } else {
         e->hitbox.w = 0;
@@ -84,6 +84,8 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
     else
         updateAnimation(&e->idle, dt);
 }
+}
+
 
 
 
