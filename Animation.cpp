@@ -42,12 +42,11 @@ void updateAnimation(Animation* a, float dt) {
     }
 }
 
-void drawAnimation(Animation* a, int x, int y, int flip) {
-  printf("DRAW %p frame=%d\n", (void*)a->tex, a->frame);
+void drawAnimation(Animation* a, int x, int y, int flip, int scale) {
     if (!a || !a->tex) return;
 
     SDL_Rect src = { a->frame * a->w, 0, a->w, a->h };
-    SDL_Rect dst = { x, y, a->w, a->h };
+    SDL_Rect dst = { x, y, a->w * scale, a->h * scale};
 
     SDL_RenderCopyEx(
         renderer,              // ✅ TEN SAM renderer
@@ -59,6 +58,7 @@ void drawAnimation(Animation* a, int x, int y, int flip) {
         flip == -1 ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE
     );
 }
+
 
 
 
