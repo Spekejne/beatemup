@@ -1,4 +1,3 @@
-ENEMIES 2
-ENEMY 500
-ENEMY 700
-END
+enemy 300 420
+enemy 500 420
+
