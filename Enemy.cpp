@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Game.h"
 #include <cmath>
+#include "Combat.h"
 
 void initEnemy(Enemy* e, float x, float y) {
     e->x = x;
@@ -97,6 +98,7 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
     else
         updateAnimation(&e->idle, dt);
 }
+
 
 
 
