@@ -92,17 +92,13 @@ void gameLoop() {
 updatePlayer(&player, dt);
 updatePlayerHitboxes(&player);
 
-
-// ==== 1) aktualizacja gracza ====
-updatePlayer(&player, dt);
-
 // ==== 2) aktualizacja enemy i hitboxów ====
 for (int i = 0; i < enemyCount; i++)
 {
     Enemy* e = &enemies[i];
     if (!e->alive) continue;
 
-    updateEnemy(e, dt);
+    updateEnemy(e, p, dt);
 
     // klucz: HITBOXY przed Combat
     updateEnemyHitboxes(e);
@@ -131,6 +127,7 @@ for (int i = 0; i < enemyCount; i++)
         SDL_Delay(16);
     }
 }
+
 
 
 
