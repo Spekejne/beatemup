@@ -14,6 +14,7 @@ struct Player {
     float x, y, z;
     float vx, vz;
     int hp;
+    int baseDamage;
     int facing;
     Action action;
 
@@ -27,11 +28,13 @@ struct Player {
     bool invincible;
     float invincibleTimer;
 
-    ComboBuffer combo;
+    int combo;
+    float comboTimer;
 };
 
 void initPlayer(Player* p);
 void updatePlayer(Player* p, float dt);
 void updatePlayerHitboxes(Player* p);
+
 
 
