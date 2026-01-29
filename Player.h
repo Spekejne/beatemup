@@ -1,6 +1,7 @@
 #pragma once
 #include "Animation.h"
 #include "Combo.h"
+#include "Hitbox.h"
 
 enum Action {
     ACT_IDLE,
@@ -20,8 +21,12 @@ struct Player {
     Animation walk;
     Animation attack;
 
+    Hitbox hurtbox;
+    Hitbox hitbox;
+
     ComboBuffer combo;
 };
 
 void initPlayer(Player* p);
 void updatePlayer(Player* p, float dt);
+
