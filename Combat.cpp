@@ -12,33 +12,37 @@ bool intersects(const Hitbox& a, const Hitbox& b) {
 
 void handleCombat(Player* p, Enemy* enemies, int count)
 {
-    // ==============================
-    // PLAYER ATAKUJE ENEMY
-    // ==============================
-    if (p->action == ACT_ATTACK &&
-        p->hitbox.w > 0 && p->hitbox.h > 0)
-    {
-        for (int i = 0; i < count; i++)
-        {
-            Enemy* e = &enemies[i];
-            if (!e->alive) continue;
-            if (e->action == EN_DEAD) continue;
+    // ❌ brak ataku = brak kolizji
+    if (p->action != ACT_ATTACK)
+        return;
 
-            if (intersects(p->hitbox, e->hurtbox))
-            {
-                e->hp--;
-                e->action = EN_HIT;
+    // ❌ brak aktywnego hitboxa
+    if (p->hitbox.w == 0 || p->hitbox.h == 0)
+        return;
 
-                e->hit.frame = 0;
-                e->hit.timer = 0;
+    for (int i = 0; i < count; i++) {
+        if (!e[i].alive)
+            continue;
 
-                if (e->hp <= 0)
-                {
-                    e->action = EN_DEAD;
-                    e->dead.frame = 0;
-                    e->dead.timer = 0;
-                    e->alive = false; // ← KLUCZ
-                }
+        // ❌ enemy już trafiony / martwy
+        if (e[i].action == EN_HIT || e[i].action == EN_DEAD)
+            continue;
+
+        // ✅ PRAWDZIWA KOLIZJA
+        if (intersects(p->hitbox, e[i].hurtbox)) {
+
+            e[i].hp--;
+            e[i].action = EN_HIT;
+
+            // reset animacji hit
+            e[i].hit.frame = 0;
+            e[i].hit.timer = 0;
+
+            // 💀 śmierć
+            if (e[i].hp <= 0) {
+                e[i].action = EN_DEAD;
+                e[i].dead.frame = 0;
+                e[i].dead.timer = 0;
             }
         }
     }
@@ -68,6 +72,7 @@ for (int i = 0; i < count; i++) {
     }
 }
 }
+
 
 
 
