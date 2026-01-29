@@ -135,10 +135,11 @@ handleCombat(&player, enemies, enemyCount);
         renderFrame(&player, enemies, enemyCount);
         SDL_Delay(16);
     }
-if gameState == STATE_EXIT{
+if (gameState == STATE_EXIT){
     shutdownGame();
 }
 }
+
 
 
 
