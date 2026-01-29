@@ -52,4 +52,29 @@ e[i].dead.timer = 0;
 }
 }
 }
+    // 👾 ENEMY ATAKUJE GRACZA
+for (int i = 0; i < count; i++) {
+    if (!e[i].alive)
+        continue;
+
+    // enemy musi atakować
+    if (e[i].action != EN_ATTACK)
+        continue;
+
+    // brak hitboxa
+    if (e[i].hitbox.w == 0 || e[i].hitbox.h == 0)
+        continue;
+
+    // kolizja
+    if (intersects(e[i].hitbox, p->hurtbox)) {
+
+        // ⚠️ NIE co klatkę – tylko raz na animację
+        if (!p->invincible) {
+            p->hp--;
+            p->invincible = true;
+            p->invincibleTimer = 0.6f; // pół sekundy
+        }
+    }
 }
+}
+
