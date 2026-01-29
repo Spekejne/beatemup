@@ -90,7 +90,7 @@ void updatePlayer(Player* p, float dt) {
 if (p->action == ACT_ATTACK) {
     updateAnimation(&p->attack, dt);
     printf("HP: %d/%d  COMBO: %d\n",
-       p->hp, p->maxHp, p->combo);
+       p->hp, p->combo);
 
     // jeśli animacja ataku się skończyła
     if (p->attack.frame == p->attack.frames - 1) {
@@ -133,6 +133,7 @@ if (p->action == ACT_ATTACK) {
     else
         updateAnimation(&p->idle, dt);
 }
+
 
 
 
