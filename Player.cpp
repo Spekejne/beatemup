@@ -21,8 +21,6 @@ void initPlayer(Player* p) {
     p->comboTimer = 0.0f;
     p->baseDamage = 400;
 
-    initCombo(&p->combo);
-
     initAnimation(
         &p->idle,
         renderer,
@@ -92,7 +90,7 @@ void updatePlayer(Player* p, float dt) {
 if (p->action == ACT_ATTACK) {
     updateAnimation(&p->attack, dt);
     printf("HP: %d/%d  COMBO: %d\n",
-       player.hp, player.maxHp, player.combo);
+       Player.hp, Player.maxHp, Player.combo);
 
     // jeśli animacja ataku się skończyła
     if (p->attack.frame == p->attack.frames - 1) {
@@ -135,6 +133,7 @@ if (p->action == ACT_ATTACK) {
     else
         updateAnimation(&p->idle, dt);
 }
+
 
 
 
