@@ -3,6 +3,9 @@
 #include "Player.h"
 #include "Hitbox.h"
 
+float hitboxOffsetX = -6.0f;  // ← przesunięcie w lewo
+float hitboxOffsetY = 0.0f;
+
 enum EnemyAction {
     EN_IDLE,
     EN_WALK,
@@ -33,5 +36,6 @@ struct Enemy {
 void initEnemy(Enemy* e, float x, float y);
 void updateEnemy(Enemy* e, Player* p, float dt);
 void updateEnemyHitboxes(Enemy* e);
+
 
 
