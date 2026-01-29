@@ -5,6 +5,7 @@
 #include "Combat.h"
 #include "Render.h"
 #include "level.h"
+#include "Collision.h"
 
 SDL_Texture* background = nullptr;
 SDL_Window* window = nullptr;
@@ -113,6 +114,7 @@ handleCombat(&player, enemies, enemyCount);
         SDL_Delay(16);
     }
 }
+
 
 
 
