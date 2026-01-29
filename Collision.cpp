@@ -1,4 +1,5 @@
 #include "Collision.h"
+#include "Game.h"
 
 void resolveBodyCollision(Player* p, Enemy* e) {
     if (!intersects(p->hurtbox, e->hurtbox))
