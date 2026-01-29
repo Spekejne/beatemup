@@ -22,7 +22,7 @@ void handleInput(Player* p) {
     }
 
     if (k[SDL_SCANCODE_Q]) {
-        gameState = STATE_GAME;
+        gameState = STATE_EXIT;
     }
 
     // --- RUCH ---
@@ -53,6 +53,7 @@ void handleInput(Player* p) {
 
     prevX = currX;
 }
+
 
 
 
