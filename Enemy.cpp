@@ -22,13 +22,12 @@ initAnimation(&e->dead, renderer, "enemy_dead.bmp", 4, 24, 32, 0.2f);
 }
 
 void updateEnemy(Enemy* e, Player* p, float dt) {
-    if (!e->alive) return;
-
     // 💀 ŚMIERĆ
     if (e->action == EN_DEAD) {
         updateAnimation(&e->dead, dt);
         return;
     }
+    if (!e->alive) return;
 
     // 💥 HIT
     if (e->action == EN_HIT) {
@@ -36,6 +35,7 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
         if (e->hit.frame == e->hit.frames - 1) {
             if (e->hp <= 0) {
                 e->action = EN_DEAD;
+                e->alive = 0;
             } else {
                 e->action = EN_IDLE;
             }
@@ -83,6 +83,7 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
     else
         updateAnimation(&e->idle, dt);
 }
+
 
 
 
