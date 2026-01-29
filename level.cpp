@@ -1,15 +1,17 @@
 #include "level.h"
-#include <stdio.h>
+#include <fstream>
+#include <string>
 
-void loadLevel(const char* path, Enemy* e, int* count) {
-    FILE* f = fopen(path, "r");
-    if (!f) return;
+void loadLevel(const char* path, Enemy* enemies, int* count) {
+    std::ifstream f(path);
+    std::string type;
+    float x, y;
+    *count = 0;
 
-    fscanf(f, "%d", count);
-    for (int i = 0; i < *count; i++) {
-        fscanf(f, "%f", &e[i].x);
-        initEnemy(&e[i]);
+    while (f >> type >> x >> y) {
+        if (type == "enemy" && *count < 16) {
+            initEnemy(&enemies[*count], x, y);
+            (*count)++;
+        }
     }
-    fclose(f);
 }
-
