@@ -146,7 +146,7 @@ if (!levelTransition) {
         }
     }
 
-    if (allDead) {
+    if (allEnemiesDead) {
         levelTransition = true;
 
         if (currentLevel == 1) {
@@ -161,6 +161,7 @@ if (gameState == STATE_EXIT){
     shutdownGame();
 }
 }
+
 
 
 
