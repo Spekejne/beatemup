@@ -69,10 +69,6 @@ return false;
 
 initPlayer(&player);
 
-// START LEVEL 1 od razu
-startLevel(1);
-
-gameState = STATE_GAME;
 return true;
 }
 
@@ -139,5 +135,6 @@ renderFrame(&player, enemies, enemyCount);
 SDL_Delay(16);
 }
 }
+
 
 
