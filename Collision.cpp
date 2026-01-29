@@ -3,6 +3,8 @@
 
 void resolveBodyCollision(Player* p, Enemy* e)
 {
+    if (p->z > 0.0f) return;
+
     if (!intersects(p->hurtbox, e->hurtbox))
         return;
 
