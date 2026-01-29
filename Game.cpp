@@ -113,7 +113,19 @@ void gameLoop() {
 
         if (gameState == STATE_GAME) {
 
-            if (allEnemiesDead) {
+    
+            // 1️⃣ UPDATE LOGIKI
+            if (!levelTransition) {
+    bool allEnemiesDead = true;
+    for (int i = 0; i < enemyCount; i++) {
+        if (enemies[i].alive) {
+            allEnemiesDead = false;
+            break;
+            }
+        }
+    }
+
+            if (allEnemiesDead && !levelTransition) {
         levelTransition = true;
 
         if (currentLevel == 1) {
@@ -123,7 +135,6 @@ void gameLoop() {
             gameState = STATE_MENU;
         }
     }
-            // 1️⃣ UPDATE LOGIKI
 updatePlayer(&player, dt);
 updatePlayerHitboxes(&player);
 
@@ -149,19 +160,11 @@ handleCombat(&player, enemies, enemyCount);
         SDL_Delay(16);
     }
 
-if (!levelTransition) {
-    bool allEnemiesDead = true;
-    for (int i = 0; i < enemyCount; i++) {
-        if (enemies[i].alive) {
-            allEnemiesDead = false;
-            break;
-        }
-    }
-}
 if (gameState == STATE_EXIT){
     shutdownGame();
 }
 }
+
 
 
 
