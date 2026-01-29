@@ -87,14 +87,25 @@ void gameLoop() {
         handleInput(&player);
 
         if (gameState == STATE_GAME) {
-            updatePlayer(&player, dt);
+            // 1️⃣ UPDATE LOGIKI
+updatePlayer(&player, dt);
 updatePlayerHitboxes(&player);
 
+
 for (int i = 0; i < enemyCount; i++) {
-    updateEnemy(&enemies[i], &player, dt);
-    updateEnemyHitboxes(&enemies[i]);
+updateEnemy(&enemies[i], &player, dt);
+updateEnemyHitboxes(&enemies[i]);
 }
 
+
+// 2️⃣ KOLIZJE CIAŁ (BLOCKING)
+for (int i = 0; i < enemyCount; i++) {
+if (!enemies[i].alive) continue;
+resolveBodyCollision(&player, &enemies[i]);
+}
+
+
+// 3️⃣ WALKA (HITBOX ↔ HURTBOX)
 handleCombat(&player, enemies, enemyCount);
         }
 
@@ -102,6 +113,7 @@ handleCombat(&player, enemies, enemyCount);
         SDL_Delay(16);
     }
 }
+
 
 
 
