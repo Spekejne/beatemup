@@ -28,8 +28,6 @@ void renderFrame(Player* p, Enemy* e, int count) {
             drawAnimation(&e[i].attack, e[i].x, e[i].y, e[i].facing, 2);
         else if (e[i].action == EN_WALK)
             drawAnimation(&e[i].walk, e[i].x, e[i].y, e[i].facing, 2);
-        else if (e[i].action == EN_HIT)
-            drawAnimation(&e[i].hit, e[i].x, e[i].y, e[i].facing, 2);
         else
             drawAnimation(&e[i].idle, e[i].x, e[i].y, e[i].facing, 2);
     }
@@ -37,6 +35,7 @@ void renderFrame(Player* p, Enemy* e, int count) {
     // 🖥️ POKAŻ KLATKĘ
     SDL_RenderPresent(renderer);
 }
+
 
 
 
