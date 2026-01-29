@@ -20,22 +20,44 @@ void initEnemy(Enemy* e, float x, float y) {
     //initAnimation(&e->dead,   renderer, "assets/enemy_dead.bmp",   5, 64, 64, 0.20f);
 }
 
-void updateEnemyHitboxes(Enemy* e) {
+void updateEnemyHitboxes(Enemy* e)
+{
     int spriteW = e->idle.w * SCALE;
     int spriteH = e->idle.h * SCALE;
 
-    e->hurtbox.x = e->x + spriteW * 0.25f;
-    e->hurtbox.y = e->y + spriteH * 0.2f;
-    e->hurtbox.w = spriteW * 0.5f;
-    e->hurtbox.h = spriteH * 0.7f;
+    // =========================
+    // BODY / HURTBOX (TYLKO NOGI)
+    // =========================
+    const int BODY_W = spriteW * 0.35f;
+    const int BODY_H = spriteH * 0.15f;
 
-    if (e->action == EN_ATTACK) {
-        int dir = e->facing;
+    e->hurtbox.w = BODY_W;
+    e->hurtbox.h = BODY_H;
+
+    // środek sprite'a + dół
+    e->hurtbox.x = e->x + spriteW * 0.5f - BODY_W * 0.5f - 6; // ← lekkie przesunięcie w LEWO
+    e->hurtbox.y = e->y + spriteH - BODY_H;
+
+    // =========================
+    // HITBOX ATAKU
+    // =========================
+    if (e->action == EN_ATTACK)
+    {
+        int dir = e->facing; // -1 lewo, 1 prawo
+
         e->hitbox.w = spriteW * 0.4f;
-        e->hitbox.h = spriteH * 0.3f;
-        e->hitbox.x = e->x + (dir == 1 ? spriteW : -e->hitbox.w);
-        e->hitbox.y = e->y + spriteH * 0.35f;
-    } else {
+        e->hitbox.h = spriteH * 0.25f;
+
+        e->hitbox.x =
+            (dir == 1)
+            ? e->x + spriteW * 0.65f
+            : e->x - e->hitbox.w + spriteW * 0.35f;
+
+        // klatka piersiowa (NIE nogi)
+        e->hitbox.y = e->y + spriteH * 0.45f;
+    }
+    else
+    {
         e->hitbox.w = 0;
         e->hitbox.h = 0;
     }
@@ -112,4 +134,5 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
     else
         updateAnimation(&e->idle, dt);
 }
+
 
