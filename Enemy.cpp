@@ -21,6 +21,7 @@ void initEnemy(Enemy* e, float x, float y) {
 }
 
 void updateEnemy(Enemy* e, Player* p, float dt) {
+    updateEnemyHitboxes(e);
     // 💀 ŚMIERĆ – animuje się, a dopiero potem znika
     if (e->action == EN_DEAD) {
         updateAnimation(&e->dead, dt);
@@ -91,3 +92,23 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
         updateAnimation(&e->idle, dt);
 }
 
+void updateEnemyHitboxes(Enemy* e) {
+    int spriteW = e->idle.w * SCALE;
+    int spriteH = e->idle.h * SCALE;
+
+    e->hurtbox.x = e->x + spriteW * 0.25f;
+    e->hurtbox.y = e->y + spriteH * 0.2f;
+    e->hurtbox.w = spriteW * 0.5f;
+    e->hurtbox.h = spriteH * 0.7f;
+
+    if (e->action == EN_ATTACK) {
+        int dir = e->facing;
+        e->hitbox.w = spriteW * 0.4f;
+        e->hitbox.h = spriteH * 0.3f;
+        e->hitbox.x = e->x + (dir == 1 ? spriteW : -e->hitbox.w);
+        e->hitbox.y = e->y + spriteH * 0.35f;
+    } else {
+        e->hitbox.w = 0;
+        e->hitbox.h = 0;
+    }
+}
