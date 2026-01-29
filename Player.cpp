@@ -47,6 +47,8 @@ void initPlayer(Player* p) {
 
 void updatePlayer(Player* p, float dt) {
 
+    updatePlayerHitboxes(p);
+
     // JEŚLI ATAK TRWA — NIC INNEGO NIE RÓB
 if (p->action == ACT_ATTACK) {
     updateAnimation(&p->attack, dt);
@@ -107,6 +109,7 @@ void updatePlayerHitboxes(Player* p) {
         p->hitbox.h = 0;
     }
 }
+
 
 
 
