@@ -14,6 +14,9 @@ void initPlayer(Player* p) {
     p->facing = 1;
     p->action = ACT_IDLE;
 
+    p->invincible = false;
+    p->invincibleTimer = 0.0f;
+
     initCombo(&p->combo);
 
     initAnimation(
@@ -70,6 +73,15 @@ void updatePlayerHitboxes(Player* p) {
 
 void updatePlayer(Player* p, float dt) {
 
+    // ⏱️ INVINCIBILITY TIMER
+    if (p->invincible) {
+        p->invincibleTimer -= dt;
+    if (p->invincibleTimer <= 0.0f) {
+        p->invincible = false;
+        p->invincibleTimer = 0.0f;
+        }
+    }
+
     updatePlayerHitboxes(p);
 
     // JEŚLI ATAK TRWA — NIC INNEGO NIE RÓB
@@ -109,3 +121,4 @@ if (p->action == ACT_ATTACK) {
     else
         updateAnimation(&p->idle, dt);
 }
+
