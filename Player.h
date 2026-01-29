@@ -24,10 +24,14 @@ struct Player {
     Hitbox hurtbox;
     Hitbox hitbox;
 
+    bool invincible;
+    float invincibleTimer;
+
     ComboBuffer combo;
 };
 
 void initPlayer(Player* p);
 void updatePlayer(Player* p, float dt);
 void updatePlayerHitboxes(Player* p);
+
 
