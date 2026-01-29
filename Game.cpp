@@ -101,33 +101,31 @@ for (int i = 0; i < enemyCount; i++)
     updateEnemy(e, &player, dt);
 
     // klucz: HITBOXY przed Combat
-    updateEnemyHitboxes(e);
-    updatePlayerHitboxes(&player); // jeśli masz podobną funkcję
+    // 1️⃣ UPDATE LOGIKI
+updatePlayer(&player, dt);
+updatePlayerHitboxes(&player);
+
+for (int i = 0; i < enemyCount; i++) {
+    updateEnemy(&enemies[i], &player, dt);
+    updateEnemyHitboxes(&enemies[i]);
 }
 
-// ==== 3) walka (Combat) ====
-for (int i = 0; i < enemyCount; i++)
-{
-    Enemy* e = &enemies[i];
-    if (!e->alive) continue;
-
-    handleCombat(&player, e, enemyCount); // Combat zaktualizuje health itd.
+// 2️⃣ KOLIZJE CIAŁ (BLOCKING)
+for (int i = 0; i < enemyCount; i++) {
+    if (!enemies[i].alive) continue;
+    resolveBodyCollision(&player, &enemies[i]);
 }
 
-// ==== 4) kolizja ciała (wypychanie) ====
-for (int i = 0; i < enemyCount; i++)
-{
-    Enemy* e = &enemies[i];
-    if (!e->alive) continue;
+// 3️⃣ WALKA (HITBOX ↔ HURTBOX)
+handleCombat(&player, enemies, enemyCount);
 
-    resolveBodyCollision(&player, e);
-}
-
-        renderFrame(&player, enemies, enemyCount);
+// 4️⃣ RENDER
+renderFrame(&player, enemies, enemyCount);
         SDL_Delay(16);
     }
     }
 }
+
 
 
 
