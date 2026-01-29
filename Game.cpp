@@ -121,7 +121,7 @@ break;
 }
 }
 
-if (allDead && !levelTransition) {
+if (allEnemiesDead && !levelTransition) {
 levelTransition = true;
 
 if (currentLevel == 1) {
@@ -139,4 +139,5 @@ renderFrame(&player, enemies, enemyCount);
 SDL_Delay(16);
 }
 }
+
 
