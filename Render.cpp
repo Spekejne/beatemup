@@ -2,41 +2,19 @@
 #include "Game.h"
 
 void renderFrame(Player* p, Enemy* e, int count) {
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-SDL_RenderClear(renderer);
-SDL_RenderPresent(renderer);
-return;
+    void renderFrame(Player* p, Enemy* e, int count) {
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
 
-    // 🔹 TŁO
-    SDL_Rect bg = { 0, 0, 800, 600 };
-    SDL_RenderCopy(renderer, background, NULL, &bg);
+    // 🟢 TEST GRACZA
+    SDL_Rect r = { (int)p->x, (int)p->y, 50, 50 };
+    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+    SDL_RenderFillRect(renderer, &r);
 
-    // 🔹 GRACZ
-    if (p->action == ACT_ATTACK)
-        drawAnimation(&p->attack, p->x, p->y - p->z, p->facing);
-    else if (p->action == ACT_WALK)
-        drawAnimation(&p->walk, p->x, p->y - p->z, p->facing);
-    else
-        drawAnimation(&p->idle, p->x, p->y - p->z, p->facing);
-
-    // 🔹 WROGOWIE
-    for (int i = 0; i < count; i++) {
-if (!e[i].alive && e[i].action != EN_DEAD) continue;
-
-
-if (e[i].action == EN_ATTACK)
-drawAnimation(&e[i].attack, e[i].x, e[i].y, e[i].facing);
-else if (e[i].action == EN_WALK)
-drawAnimation(&e[i].walk, e[i].x, e[i].y, e[i].facing);
-else if (e[i].action == EN_HIT)
-drawAnimation(&e[i].hit, e[i].x, e[i].y, e[i].facing);
-else if (e[i].action == EN_DEAD)
-drawAnimation(&e[i].dead, e[i].x, e[i].y, e[i].facing);
-else
-drawAnimation(&e[i].idle, e[i].x, e[i].y, e[i].facing);
+    SDL_RenderPresent(renderer);
 }
 }
+
 
 
 
