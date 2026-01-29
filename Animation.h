@@ -11,9 +11,10 @@ struct Animation {
 };
 
 void initAnimation(Animation* a, SDL_Renderer* r,
-                   const char* path, int f, int w, int h, float t);
+                   const char* path, int f, int w, int h, float t, Uint8 rKey, Uint8 gKey, Uint8 bKey);
 void updateAnimation(Animation* a, float dt);
 void drawAnimation(Animation* a, int x, int y, int flip, int scale);
+
 
 
 
