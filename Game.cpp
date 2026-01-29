@@ -92,47 +92,28 @@ void gameLoop() {
 updatePlayer(&player, dt);
 updatePlayerHitboxes(&player);
 
-// ==== 2) aktualizacja enemy i hitboxów ====
-for (int i = 0; i < enemyCount; i++)
-{
-    Enemy* e = &enemies[i];
-    if (!e->alive) continue;
-
-    updateEnemy(e, &player, dt);
-
-    // klucz: HITBOXY przed Combat
-    // 1️⃣ UPDATE LOGIKI
-updatePlayer(&player, dt);
-updatePlayerHitboxes(&player);
 
 for (int i = 0; i < enemyCount; i++) {
-    updateEnemy(&enemies[i], &player, dt);
-    updateEnemyHitboxes(&enemies[i]);
+updateEnemy(&enemies[i], &player, dt);
+updateEnemyHitboxes(&enemies[i]);
 }
+
 
 // 2️⃣ KOLIZJE CIAŁ (BLOCKING)
 for (int i = 0; i < enemyCount; i++) {
-    if (!enemies[i].alive) continue;
-    resolveBodyCollision(&player, &enemies[i]);
+if (!enemies[i].alive) continue;
+resolveBodyCollision(&player, &enemies[i]);
 }
+
 
 // 3️⃣ WALKA (HITBOX ↔ HURTBOX)
 handleCombat(&player, enemies, enemyCount);
+        }
 
-// 4️⃣ RENDER
-renderFrame(&player, enemies, enemyCount);
+        renderFrame(&player, enemies, enemyCount);
         SDL_Delay(16);
     }
-    }
 }
-
-
-
-
-
-
-
-
 
 
 
