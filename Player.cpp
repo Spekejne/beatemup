@@ -23,6 +23,7 @@ void initPlayer(Player* p) {
         6, // liczba klatek
         24, 32, // szerokość, wysokość klatki
         0.12f
+        255, 255, 255
     );
     initAnimation(
         &p->walk,
@@ -30,7 +31,8 @@ void initPlayer(Player* p) {
         "player_walk.bmp",
         6,        // liczba klatek
         24, 32,   // rozmiar klatki
-        0.1f      // trochę szybciej niż idle
+        0.1f,      // trochę szybciej niż idle
+        255, 255, 255
     );
     initAnimation(
         &p->attack,
@@ -38,7 +40,8 @@ void initPlayer(Player* p) {
         "player_attack.bmp",
         6,        // liczba klatek
         22, 32,
-        0.08f
+        0.08f,
+        255, 255, 255
     );
 }
 
@@ -81,6 +84,7 @@ if (p->action == ACT_ATTACK) {
     else
         updateAnimation(&p->idle, dt);
 }
+
 
 
 
