@@ -27,6 +27,7 @@ void handleInput(Player* p) {
 
     // --- RUCH ---
     p->vx = 0;
+    p->vy = 0;
 
     if (k[SDL_SCANCODE_A]) {
         p->vx = -200;
@@ -34,6 +35,14 @@ void handleInput(Player* p) {
     }
     else if (k[SDL_SCANCODE_D]) {
         p->vx = 200;
+        p->facing = 1;
+    }
+    else if (k[SDL_SCANCODE_W]) {
+        p->vy = 200;
+        p->facing = 1;
+    }
+    else if (k[SDL_SCANCODE_S]) {
+        p->vy = -200;
         p->facing = 1;
     }
 
@@ -53,6 +62,7 @@ void handleInput(Player* p) {
 
     prevX = currX;
 }
+
 
 
 
