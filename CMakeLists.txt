@@ -17,7 +17,6 @@ set(SRCS
     Player.cpp
     Enemy.cpp
     Input.cpp
-    Combo.cpp
     Combat.cpp
     Animation.cpp
     Render.cpp
