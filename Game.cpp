@@ -13,6 +13,7 @@ SDL_Renderer* renderer = nullptr;
 int running = 1;
 int currentLevel = 1;
 GameState gameState = STATE_MENU;
+bool levelTransition = false;
 
 Player player;
 Enemy enemies[16];
@@ -135,10 +136,32 @@ handleCombat(&player, enemies, enemyCount);
         renderFrame(&player, enemies, enemyCount);
         SDL_Delay(16);
     }
+
+if (!levelTransition) {
+    bool allEnemiesDead = true;
+    for (int i = 0; i < enemyCount; i++) {
+        if (enemies[i].alive) {
+            allEnemiesDead = false;
+            break;
+        }
+    }
+
+    if (allDead) {
+        levelTransition = true;
+
+        if (currentLevel == 1) {
+            startLevel(2);
+            levelTransition = false; // reset po starcie
+        } else {
+            gameState = STATE_MENU;
+        }
+    }
+}
 if (gameState == STATE_EXIT){
     shutdownGame();
 }
 }
+
 
 
 
