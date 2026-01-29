@@ -1,0 +1,3 @@
+enemy 200 420
+enemy 400 420
+enemy 600 420
