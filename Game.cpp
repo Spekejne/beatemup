@@ -20,6 +20,7 @@ Enemy enemies[16];
 int enemyCount = 0;
 
 void startLevel(int level) {
+    levelTransition = false;
     enemyCount = 0;
 
     if (level == 1)
@@ -111,6 +112,17 @@ void gameLoop() {
         handleInput(&player);
 
         if (gameState == STATE_GAME) {
+
+            if (allEnemiesDead) {
+        levelTransition = true;
+
+        if (currentLevel == 1) {
+            startLevel(2);
+            levelTransition = false; // reset po starcie
+        } else {
+            gameState = STATE_MENU;
+        }
+    }
             // 1️⃣ UPDATE LOGIKI
 updatePlayer(&player, dt);
 updatePlayerHitboxes(&player);
@@ -145,22 +157,12 @@ if (!levelTransition) {
             break;
         }
     }
-
-    if (allEnemiesDead) {
-        levelTransition = true;
-
-        if (currentLevel == 1) {
-            startLevel(2);
-            levelTransition = false; // reset po starcie
-        } else {
-            gameState = STATE_MENU;
-        }
-    }
 }
 if (gameState == STATE_EXIT){
     shutdownGame();
 }
 }
+
 
 
 
