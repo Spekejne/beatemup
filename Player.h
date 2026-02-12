@@ -12,7 +12,7 @@ enum Action {
 
 struct Player {
     float x, y, z;
-    float vx, vz;
+    float vx, vy, vz;
     int hp;
     int baseDamage;
     int facing;
@@ -35,6 +35,7 @@ struct Player {
 void initPlayer(Player* p);
 void updatePlayer(Player* p, float dt);
 void updatePlayerHitboxes(Player* p);
+
 
 
 
