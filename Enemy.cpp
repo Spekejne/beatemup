@@ -62,7 +62,7 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
     float dy = p->y - e->y;
 
     float dist = fabs(dx);
-    flost distY = fabs(dy);
+    float distY = fabs(dy);
 
     e->facing = (dx > 0) ? 1 : -1;
 
@@ -97,7 +97,7 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
         e->vy = (dy > 0) ? 60.0f : -60.0f;
 
     if (e->vx != 0 || e->vy != 0)
-        e->action = EN_WALK
+        e->action = EN_WALK;
     else {
         e->action = EN_IDLE;
     }
@@ -110,6 +110,7 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
     else
         updateAnimation(&e->idle, dt);
 }
+
 
 
 
