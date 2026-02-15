@@ -15,6 +15,8 @@ void initEnemy(Enemy* e, float x, float y) {
     e->attackDamage = 1;
     e->action = EN_IDLE;
 
+    printf("Enemy init at %f %f renderer=%p\n", x, y, renderer);
+
     // ⚠️ DOPASUJ ŚCIEŻKI I ROZMIARY DO SWOICH BMP
     initAnimation(&e->idle,   renderer, "enemy_idle.bmp",   5, 64, 64, 0.15f, 255, 0, 255);
     initAnimation(&e->walk,   renderer, "enemy_walk.bmp",   5, 64, 64, 0.10f, 255, 0, 255);
@@ -110,6 +112,7 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
     else
         updateAnimation(&e->idle, dt);
 }
+
 
 
 
