@@ -102,6 +102,7 @@ if (p->action == ACT_ATTACK) {
 }
     
     p->x += p->vx * dt;
+    p->y += p->vy * dt;
 
     p->vz -= GRAVITY * dt;
     p->z += p->vz;
@@ -133,6 +134,7 @@ if (p->action == ACT_ATTACK) {
     else
         updateAnimation(&p->idle, dt);
 }
+
 
 
 
