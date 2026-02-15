@@ -113,7 +113,7 @@ if (p->action == ACT_ATTACK) {
     }
 
     if (p->action != ACT_ATTACK) {
-    if (p->vx != 0)
+    if (p->vx != 0 || p->vy != 0)
         p->action = ACT_WALK;
     else
         p->action = ACT_IDLE;
@@ -134,6 +134,7 @@ if (p->action == ACT_ATTACK) {
     else
         updateAnimation(&p->idle, dt);
 }
+
 
 
 
