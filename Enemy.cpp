@@ -73,10 +73,8 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
         e->vx = 0;
         e->action = EN_ATTACK;
         updateAnimation(&e->attack, dt);
-        return;
-    }
 
-    if (e->action == EN_ATTACK && intersects(e->hitbox, p->hurtbox)) {
+        if (e->action == EN_ATTACK && intersects(e->hitbox, p->hurtbox)) {
     p->hp -= 1;        // enemy damage
     p->combo = 0;     // 💥 reset combo po dostaniu hita
     p->comboTimer = 0;
@@ -86,7 +84,9 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
     if (p->hp <= 0) {
         gameState = STATE_MENU; // albo GAME OVER
     }
-}
+        
+        return;
+    }
 
     // 🚶 CHODZENIE DO GRACZA
     e->vx = 0;
@@ -112,6 +112,7 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
     else
         updateAnimation(&e->idle, dt);
 }
+
 
 
 
