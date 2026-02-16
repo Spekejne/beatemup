@@ -80,6 +80,7 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
     p->comboTimer = 0;
 
     printf("PLAYER HIT! HP=%d\n", p->hp);
+        }
 
     if (p->hp <= 0) {
         gameState = STATE_MENU; // albo GAME OVER
@@ -112,6 +113,7 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
     else
         updateAnimation(&e->idle, dt);
 }
+
 
 
 
