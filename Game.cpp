@@ -111,56 +111,60 @@ void gameLoop() {
         handleInput(&player);
 
         if (gameState == STATE_GAME) {
+
             // 1️⃣ UPDATE LOGIKI
-updatePlayer(&player, dt);
-updatePlayerHitboxes(&player);
+            updatePlayer(&player, dt);
+            updatePlayerHitboxes(&player);
 
+            for (int i = 0; i < enemyCount; i++) {
+                updateEnemy(&enemies[i], &player, dt);
+                updateEnemyHitboxes(&enemies[i]);
+            }
 
-for (int i = 0; i < enemyCount; i++) {
-updateEnemy(&enemies[i], &player, dt);
-updateEnemyHitboxes(&enemies[i]);
-}
+            // 2️⃣ KOLIZJE CIAŁ (BLOCKING)
+            for (int i = 0; i < enemyCount; i++) {
+                if (!enemies[i].alive)
+                    continue;
 
+                resolveBodyCollision(&player, &enemies[i]);
+            }
 
-// 2️⃣ KOLIZJE CIAŁ (BLOCKING)
-for (int i = 0; i < enemyCount; i++) {
-if (!enemies[i].alive) continue;
-resolveBodyCollision(&player, &enemies[i]);
-}
-
-
-// 3️⃣ WALKA (HITBOX ↔ HURTBOX)
-handleCombat(&player, enemies, enemyCount);
+            // 3️⃣ WALKA (HITBOX ↔ HURTBOX)
+            handleCombat(&player, enemies, enemyCount);
         }
 
         renderFrame(&player, enemies, enemyCount);
         SDL_Delay(16);
     }
 
-if (!levelTransition) {
-    bool allEnemiesDead = true;
-    for (int i = 0; i < enemyCount; i++) {
-        if (enemies[i].alive) {
-            allEnemiesDead = false;
-            break;
+    if (!levelTransition) {
+        bool allEnemiesDead = true;
+
+        for (int i = 0; i < enemyCount; i++) {
+            if (enemies[i].alive) {
+                allEnemiesDead = false;
+                break;
+            }
+        }
+
+        if (allEnemiesDead) {
+            levelTransition = true;
+
+            if (currentLevel == 1) {
+                startLevel(2);
+                levelTransition = false; // reset po starcie
+            } else {
+                gameState = STATE_MENU;
+            }
         }
     }
 
-    if (allEnemiesDead) {
-        levelTransition = true;
-
-        if (currentLevel == 1) {
-            startLevel(2);
-            levelTransition = false; // reset po starcie
-        } else {
-            gameState = STATE_MENU;
-        }
+    if (gameState == STATE_EXIT) {
+        shutdownGame();
     }
 }
-if (gameState == STATE_EXIT){
-    shutdownGame();
-}
-}
+
+
 
 
 
