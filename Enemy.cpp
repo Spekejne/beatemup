@@ -67,8 +67,11 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
     float distY = fabs(dy);
 
     e->facing = (dx > 0) ? 1 : -1;
+        
+        return;
+    }
 
-    // ⚔️ ATAK – TYLKO BARDZO BLISKO
+// ⚔️ ATAK – TYLKO BARDZO BLISKO
     if (dist < 28 && distY < 20) {
         e->vx = 0;
         e->action = EN_ATTACK;
@@ -84,9 +87,6 @@ void updateEnemy(Enemy* e, Player* p, float dt) {
 
     if (p->hp <= 0) {
         gameState = STATE_MENU; // albo GAME OVER
-    }
-        
-        return;
     }
 
     // 🚶 CHODZENIE DO GRACZA
