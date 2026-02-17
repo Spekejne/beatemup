@@ -39,16 +39,28 @@ void updateGame(float dt)
         return;
     }
 
+    if (gameState != STATE_GAME)
+        return;
+
     updatePlayer(&player, dt);
+    updatePlayerHitboxes(&player);
 
     updateEnemies(enemies, enemyCount, dt, &player);
 
-    resolveCollisions();
+    for (int i = 0; i < enemyCount; i++)
+    {
+        if (!enemies[i].alive)
+            continue;
 
+        updateEnemyHitboxes(&enemies[i]);
+    }
+
+    resolveCollisions();
     resolveCombat();
 
     updateLevel(dt);
 }
+
 
 void resolveCollisions()
 {
